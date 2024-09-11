@@ -5,13 +5,37 @@ class Interface:
         self.player2 = player2 # holds a board object for player 2
 
     def place_ship(self, player, start_pos, end_pos):
-        # still missing error checks and other logic such as what happens if 1A is passed instead of A1, etc...
-        start_col, start_row = start_pos[0], start_pos[1:] 
-        end_col, end_row = end_pos[0], end_pos[1:] 
+        # still missing error checks and other logic such as what happens if 1A is passed instead of A1, etc...        
+
+        # Cast the input initially for easier error checking
+        start_col, start_row = ord(start_pos[0]), int(start_pos[1:])
+        end_col, end_row = ord(end_pos[0]), int(end_pos[1:]) 
+
         
+        ''' for debugging
+        print(type(start_col), " ", type(start_row))
+        print(start_col, " ", start_row)
+        '''
+
+        # Check that the column is A-J and row is 1-10
+        if not(65 <= start_col <= 74):
+            print("Start column out of range\n")
+        elif not(1 <= start_row <= 10):
+            print("Start row out of range\n")
+        else:
+            print("Start column and row in range\n")
+
+        if not(65 <= end_col <= 74):
+            print("End column out of range\n")
+        elif not(1 <= end_row <= 10):
+            print("End row out of range\n")
+        else:
+            print("End column and row in range\n")
+        
+
         # convert columns A-J to indices 0-9
-        start_col_index = ord(start_col) - ord("A")
-        end_col_index = ord(end_col) - ord("A")
+        start_col_index = start_col - ord("A")
+        end_col_index = end_col - ord("A")
 
         # convert rows (1-10) to indices (0-9)
         start_row_index = int(start_row) - 1
