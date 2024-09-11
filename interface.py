@@ -1,8 +1,13 @@
 class Interface:
-    def __init__(self, player1, player2):
+    def __init__(self, player1, player2, num_ships):
         self.config = {0: "□", 1: "■", 2: "•", 3: "○"}  # 0: blank, 1: ship, 2: hit, 3: miss
         self.player1 = player1 # holds a board object for player 1
         self.player2 = player2 # holds a board object for player 2
+        
+        if not(1 <= num_ships <=5):
+            raise ValueError("Invalid number of ships\n")
+        else:
+            self.num_ships = num_ships
 
     def place_ship(self, player, start_pos, end_pos):
         # still missing error checks and other logic such as what happens if 1A is passed instead of A1, etc...        
@@ -11,35 +16,21 @@ class Interface:
         start_col, start_row = ord(start_pos[0]), int(start_pos[1:])
         end_col, end_row = ord(end_pos[0]), int(end_pos[1:]) 
 
-        
-        ''' for debugging
-        print(type(start_col), " ", type(start_row))
-        print(start_col, " ", start_row)
-        '''
-
-        # Check that the column is A-J and row is 1-10
-        if not(65 <= start_col <= 74):
-            print("Start column out of range\n")
-        elif not(1 <= start_row <= 10):
-            print("Start row out of range\n")
+        # Check that the column is in the ranges A-J(65 - 74) and row is 1-10
+        if not(65 <= start_col <= 74) or not(1 <= start_row <= 10):
+            raise ValueError("Invalid start position\n")
         else:
-            print("Start column and row in range\n")
+            #print("Start column and row in range\n")
+            start_col_index = start_col - ord("A")
+            start_row_index = int(start_row) - 1
+            
 
-        if not(65 <= end_col <= 74):
-            print("End column out of range\n")
-        elif not(1 <= end_row <= 10):
-            print("End row out of range\n")
+        if not(65 <= end_col <= 74) or not(1 <= end_row <= 10):
+            raise ValueError("Invalid end position")
         else:
-            print("End column and row in range\n")
-        
-
-        # convert columns A-J to indices 0-9
-        start_col_index = start_col - ord("A")
-        end_col_index = end_col - ord("A")
-
-        # convert rows (1-10) to indices (0-9)
-        start_row_index = int(start_row) - 1
-        end_row_index = int(end_row) - 1
+            #print("End column and row in range\n")
+            end_col_index = end_col - ord("A")
+            end_row_index = int(end_row) - 1
 
         player._place_ship(start_row_index, start_col_index, end_row_index, end_col_index)
 
