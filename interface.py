@@ -4,12 +4,20 @@ class Interface:
         self.player1 = player1 # holds a board object for player 1
         self.player2 = player2 # holds a board object for player 2
 
-    def place_ship(self, player, position):
+    def place_ship(self, player, start_pos, end_pos):
         # still missing error checks and other logic such as what happens if 1A is passed instead of A1, etc...
-        col, row = position[0], position[1:] 
-        col_to_index = ord(col) - ord("A")
-        row_to_index = int(row) - 1
-        player._place_ship(col_to_index, row_to_index)
+        start_col, start_row = start_pos[0], start_pos[1:] 
+        end_col, end_row = end_pos[0], end_pos[1:] 
+        
+        # convert columns A-J to indices 0-9
+        start_col_index = ord(start_col) - ord("A")
+        end_col_index = ord(end_col) - ord("A")
+
+        # convert rows (1-10) to indices (0-9)
+        start_row_index = int(start_row) - 1
+        end_row_index = int(end_row) - 1
+
+        player._place_ship(start_row_index, start_col_index, end_row_index, end_col_index)
 
     def print_board(self, player, censored=False):
         column_headers = "   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
