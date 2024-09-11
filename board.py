@@ -2,8 +2,11 @@ class Board:
 
     def __init__(self):
         self.matrix = [[0] * 10 for _ in range(10)] # initialize a 10x10 matrix with zeroes
+        #TODO: add a self.ships = [] to keep track of ship objects per board
 
     def _place_ship(self, start_i, start_j, end_i, end_j):
+        #TODO: change this to use the ships class. 
+        
         print(f"{start_i},{start_j}: {end_i},{end_j}") # debug
         if start_i == end_i:  # horizontal ship placement
             print("HORIZONTAL") # debug
@@ -15,6 +18,7 @@ class Board:
                 self.matrix[i][start_j] = 1
         else:
             raise ValueError("Ships must be placed either horizontally or vertically.")
+        
         
     def __repr__(self):
         #for debug purposes

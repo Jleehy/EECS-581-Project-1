@@ -5,7 +5,7 @@ def main():
     player1 = Board() # create a board for player 1
     player2 = Board() # create a board for player 2
 
-    app = Interface(player1, player2) # create a interface object with both players assigned
+    app = Interface(player1, player2, 2) # create a interface object with both players assigned
     
     app.print_board(player1) # print board for player 1
 
