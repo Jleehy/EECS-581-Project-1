@@ -7,7 +7,7 @@ class Board:
         self.matrix = [[0] * 10 for _ in range(10)] # Initialize a 10x10 matrix with zeroes
         self.ships = [] # Store ships placed on the board.
 
-    def is_valid_move(self): #used to verify no overlap
+    def _is_valid_move(self): #used to verify no overlap
         # Iterate through each pair of ships
         for i in range(len(self.ships)):
             for j in range(i + 1, len(self.ships)):
@@ -25,14 +25,14 @@ class Board:
             new_ship = Ship(size, stern_x, stern_y, vert = False) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
-            if not self.is_valid_move(): #---------------------------------------verifies no overlap
+            if not self._is_valid_move(): #---------------------------------------verifies no overlap
                 del new_ship
                 self.ships.pop()
                 return False
 
              # Iterate through the x axis.
             for y in range(min(stern_y, bow_y), max(stern_y, bow_y) + 1):
-                self._update_matrix(stern_x, y, 1) # Could be overkill but maybe we want future logic.
+                self._update_matrix(stern_x, y, 1)
             return True
         
         # Vertical ship placement
@@ -42,14 +42,14 @@ class Board:
             new_ship = Ship(size, stern_x, stern_y, vert = True) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
-            if not self.is_valid_move(): #-----------------------------------------verifies no overlap
+            if not self._is_valid_move(): #-----------------------------------------verifies no overlap
                 del new_ship
                 self.ships.pop()
                 return False
 
             # Iterate through the y axis.
             for x in range(min(stern_x, bow_x), max(stern_x, bow_x) + 1):
-                self._update_matrix(x, stern_y, 1) # Could be overkill but maybe we want future logic.
+                self._update_matrix(x, stern_y, 1)
             return True
         #----------------------------------------------
 
