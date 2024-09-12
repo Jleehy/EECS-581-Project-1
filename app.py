@@ -7,6 +7,40 @@ class App:
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships
 
+    # Place a ship on a player's board and validate placement.
+    def place_ship(self, player, stern_x, stern_y, bow_x, bow_y, ship_size):
+
+        # Verify the ship placement is correct.
+        if self._is_diagonal(stern_x, bow_x, stern_y, bow_y):
+            return False
+
+        # Verify the ship length is correct.
+        if ((stern_x == bow_x) and (abs(stern_y - bow_y) == ship_size - 1)) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == ship_size - 1)):
+            if not player.place_ship(stern_x, stern_y, bow_x, bow_y): # Checks for overlapping.
+                print("Ships cannot overlap.")
+                return False
+        else:
+            print(f"The length of ship must be {ship_size}.")
+            return False
+        
+        return True # Ship placed successfully.
+
+    # Print a player's board with literal coordinates.
+    def print_board(self, player, censored=False):
+        column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
+        print(column_headers)
+
+        # create the formatted board with row numbers and symbols
+        for i, row in enumerate(player.matrix):
+            # add row numbers (1-10), then the formatted row contents
+            if censored:
+                row_str = f"{i+1:2} " + " | ".join(self.config[0] if cell == 1 else self.config[cell] for cell in row)
+            else:
+                row_str = f"{i+1:2} " + " | ".join(self.config[cell] for cell in row)
+            print(row_str)
+
+        print()
+
     @staticmethod
     # Check if the program should exit.
     def check_quit(action):
@@ -38,7 +72,7 @@ class App:
     
     @staticmethod
     # Return whether a ship is placed diagonally or not.
-    def is_diagonal(stern_x, bow_x, stern_y, bow_y):
+    def _is_diagonal(stern_x, bow_x, stern_y, bow_y):
         if stern_x != bow_x and stern_y != bow_y:
             print("Ships must be placed horizontally or vertically\n")
             return True
@@ -63,35 +97,3 @@ class App:
             return False
         
         return True
-
-    # Place a ship on a player's board and validate placement.
-    def place_ship(self, player, stern_x, stern_y, bow_x, bow_y, ship_size):
-        if self.is_diagonal(stern_x, bow_x, stern_y, bow_y):
-            return False
-
-        # Verify the ship length is correct
-        if ((stern_x == bow_x) and (abs(stern_y - bow_y) == ship_size - 1)) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == ship_size - 1)):
-            if not player.place_ship(stern_x, stern_y, bow_x, bow_y):
-                print("Ships cannot overlap.")
-                return False
-            return True
-        else:
-            print(f"The length of ship must be {ship_size}.")
-            return False
-
-    # Print a player's board with literal coordinates.
-    def print_board(self, player, censored=False):
-        column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
-        print(column_headers)
-
-        # create the formatted board with row numbers and symbols
-        for i, row in enumerate(player.matrix):
-            # add row numbers (1-10), then the formatted row contents
-            if censored:
-                row_str = f"{i+1:2} " + " | ".join(self.config[0] if cell == 1 else self.config[cell] for cell in row)
-            else:
-                row_str = f"{i+1:2} " + " | ".join(self.config[cell] for cell in row)
-            print(row_str)
-
-        print()
-
