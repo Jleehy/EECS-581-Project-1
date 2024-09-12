@@ -40,7 +40,7 @@ def main():
         num_ships = input("Enter the number of ships: ")
         if num_ships.isnumeric():
             num_ships = int(num_ships)
-            if not (num_ships > 0 or num_ships < 6):
+            if not (num_ships > 0 and num_ships < 6):
                 print("The number of ships must be an integer between 1 and 5.")
             else:
                 ships_okay = False
