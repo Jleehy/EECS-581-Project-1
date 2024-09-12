@@ -17,7 +17,7 @@
 9/11/24 - 1.5h
 
 - Created the main game loop.
-- Added a functiono to quit the program using sys.exit.
+- Added a function to quit the program using sys.exit.
 - Added input polling and error handling for ship placement.
 
 9/12/24 - 1h
@@ -34,7 +34,7 @@
 
 - Created GitHub repo
 
-9/12/24 - 2 hr
+9/12/24 - 2h
 
 - Added ship overlap detection to board.hs and main.hs.
 - Added ship count selection and checks to ensure that the count is between 1 and 5.
