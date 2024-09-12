@@ -25,7 +25,7 @@ def prompt_ships():
 # Prompt the user for a ship coordinate, ensuring a valid input.
 def prompt_ship_coordinate(ship_number, part, player):
     while True:
-        coord = input(f"Coordinate for the {part} of ship {ship_number + 1}: ").strip().upper()[:3]
+        coord = input(f"Coordinate for the {part} of ship {ship_number + 1}, with dimensions 1x{ship_number+1}: ").strip().upper()[:3]
         check_quit(coord)
         if player.is_valid_coordinate(coord[0], coord[1:]):
             return coord
@@ -49,8 +49,12 @@ def main():
             app.print_board(player)
 
             while True:
-                stern = prompt_ship_coordinate(ship, "rear", player) # Rear coordinate of the ship.
-                bow = prompt_ship_coordinate(ship, "front", player) # Front coordinate of the ship.
+                # If the ship size is 1, assign both bow and stern to the same coordinate.
+                if ship == 0:
+                    stern = bow = prompt_ship_coordinate(ship, "rear", player)
+                else:
+                    stern = prompt_ship_coordinate(ship, "rear", player) # Rear coordinate of the ship.
+                    bow = prompt_ship_coordinate(ship, "front", player) # Front coordinate of the ship.
 
                 # Create indices for the stern and bow.
                 # Note: There is no need to wrap this in a try-except because
