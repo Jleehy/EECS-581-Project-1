@@ -83,7 +83,8 @@ def main():
                 # Place the player's ship on their board.
                 # Verifies that the ship length is correct
                 if ((stern_x == bow_x) and (abs(stern_y - bow_y) == (ship))) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == (ship))):
-                    player.place_ship(stern_x, stern_y, bow_x, bow_y)
+                    if not player.place_ship(stern_x, stern_y, bow_x, bow_y):
+                        continue
                 else:
                     print(f"The length of ship {ship+1} must be {ship+1}.")
                     continue
