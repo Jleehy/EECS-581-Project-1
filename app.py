@@ -33,14 +33,10 @@ class App:
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
         # Cast the input initially for easier error checking
-        """
-        col, row = self.literals_to_indices(pos)
+        x, y = self.literals_to_indices(pos)
 
-        col_index, row_index = self._is_valid_coordinate(col, row) # Convert literal to an index.
-
-        defender.attack(col_index, row_index) # Attack player's board on the indices.
-        """
-
+        defender.attack(x, y) # Attack player's board on the indices.
+        
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
         column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)

@@ -53,19 +53,20 @@ class Board:
             return True
         #----------------------------------------------
 
-    def attack(self, stern_x, stern_y):
-        """
+    def attack(self, x, y):
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)
         for ship in self.ships:
             # Check if the indices match the ships stored indices.
-            if (i, j) in ship.indices: 
+            print(ship.indices)
+            print(x, y)
+            if (x, y) in ship.indices: 
                 print("HIT")
                 hit = True  # Set flag to True if a hit occurs.
                 break
         if not hit:
             print("MISS")
-        """
+    
     
      # Could be overkill but maybe we want future logic.
     def _update_matrix(self, i, j, val):
