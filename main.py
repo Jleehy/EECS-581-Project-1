@@ -45,8 +45,7 @@ def main():
         app.print_board(player1)
 
         # NOTE : ATTACK LOGIC HERE
-        action = input("Enter your action: ")
-        app.check_quit(action)
+        #app.prompt_attack()
 
 if __name__ == "__main__":
     main()
