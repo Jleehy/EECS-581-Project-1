@@ -21,6 +21,7 @@
 - Moved the accounting of person-hours from Google Docs to the repository.
 
 **Jacob Leehy**
+
 9/10/24 - 15min
 
 - Created GitHub repo
