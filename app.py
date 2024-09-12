@@ -33,8 +33,8 @@ class App:
 
     # Check if a coordinate is valid, if so convert literal to indices and return indices.
     def _is_valid_coordinate(self, x, y):
-        # Check that the column is in the ranges A-J(65 - 74) and row is 1-10
-        if not(65 <= x <= 74) or not(1 <= y <= 10):
+        # Check that the column is in the ranges A-J and row is 1-10
+        if not(ord('A') <= x <= ord('J')) or not(1 <= y <= 10):
             raise ValueError("Invalid start position\n")
         else:
             #print("Start column and row in range\n")
