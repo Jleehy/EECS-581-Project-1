@@ -16,43 +16,32 @@ class Board:
                     return False  # If any pair of ships overlap, return False
         return True  # If no overlaps are found, return True
     
-    # Place a ship on board given indices.
-    def place_ship(self, stern_x, stern_y, bow_x, bow_y):      
-        # Horizontal ship placement
-        if stern_x == bow_x: 
-            size = abs(stern_y - bow_y) + 1
-
-            new_ship = Ship(size, stern_x, stern_y, vert = False) # Create a ship object with i,j indices and whether its placed vertically. 
-            self.ships.append(new_ship) # Store the ship
-
-            if not self._is_overlapping(): #---------------------------------------verifies no overlap
-                del new_ship
-                self.ships.pop()
+    # Place a ship on board given indices. returns true if placed successfully, false if not
+    def place_ship(self, stern_x, stern_y, bow_x, bow_y, realLength):
+        #checks if the ship is diagonal, returns false if it is
+        if stern_x != bow_x and stern_y != bow_y:
+            print("Ships must be placed horizontally or vertically\n")
+            return False
+        length = max(abs(stern_x - bow_x), abs(stern_y - bow_y)) + 1 #calculate the length
+        if length != realLength: #if the length isn't the intended length, tell user and return false
+            print(f"The length of ship must be {realLength}.")
+            return False
+        vert = (stern_x == bow_x) #determine if the ship is vertical or not
+        new_ship = Ship(length, stern_x, stern_y, vert = vert) #create a new ship
+        for ship in self.ships: #this loop checks if the new ship overlaps with any previous ship, returns false if yes
+            if new_ship._overlaps(ship):
+                print("Ships cannot overlap.")
                 return False
-
-             # Iterate through the x axis.
+        self.ships.append(new_ship) #put the ship in the ship array
+        if vert: #if the ship is vertical, we update the board vertically to include the ship
             for y in range(min(stern_y, bow_y), max(stern_y, bow_y) + 1):
-                self._update_matrix(stern_x, y, 1)
-            return True
-        
-        # Vertical ship placement
-        elif stern_y == bow_y: 
-            size = abs(stern_x - bow_x) + 1
-
-            new_ship = Ship(size, stern_x, stern_y, vert = True) # Create a ship object with i,j indices and whether its placed vertically. 
-            self.ships.append(new_ship) # Store the ship
-
-            if not self._is_overlapping(): #-----------------------------------------verifies no overlap
-                del new_ship
-                self.ships.pop()
-                return False
-
-            # Iterate through the y axis.
+                self._update_matrix(stern_x, y, length)
+        else: #if the ship is vertical, we update the board vertically to include the ship
             for x in range(min(stern_x, bow_x), max(stern_x, bow_x) + 1):
-                self._update_matrix(x, stern_y, 1)
-            return True
+                self._update_matrix(x, stern_y, length)
+        return True #returns true only if ship was successfully placed
         #----------------------------------------------
-
+    
     def attack(self, x, y):
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)

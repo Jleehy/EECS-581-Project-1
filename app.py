@@ -2,33 +2,21 @@ import sys
 
 class App:
     def __init__(self, player1, player2, num_ships=0):
-        self.config = {0: "□", 1: "■", 2: "•", 3: "○"}  # 0: blank, 1: ship, 2: hit, 3: miss
+        # 0: blank, 1 - 5: ships of different colors, 6: red hit, 4: miss
+        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m", 7: "○"} 
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships
 
-    # Place a ship on a player's board and validate placement.
+    # Place a ship on a player's board and validate placement. 
+    # Returns False if ship placement is unsuccessful and true if it is
     def place_ship(self, player, stern, bow, ship_size):
         # Create indices for the stern and bow.
         # Note: There is no need to wrap this in a try-except because
         # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
         # to integers.
         stern_x, stern_y, bow_x, bow_y = self.literals_to_indices(stern, bow)
-         
-        # Verify the ship placement is correct.
-        if self._is_diagonal(stern_x, bow_x, stern_y, bow_y):
-            return False
-
-        # Verify the ship length is correct.
-        if ((stern_x == bow_x) and (abs(stern_y - bow_y) == ship_size - 1)) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == ship_size - 1)):
-            if not player.place_ship(stern_x, stern_y, bow_x, bow_y): # Checks for overlapping.
-                print("Ships cannot overlap.")
-                return False
-        else:
-            print(f"The length of ship must be {ship_size}.")
-            return False
-        
-        return True # Ship placed successfully.
+        return player.place_ship(stern_x, stern_y, bow_x, bow_y, ship_size) #player.place_ship checks for validity
     
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
@@ -96,14 +84,14 @@ class App:
             else:
                 print("The number of ships must be an integer between 1 and 5.")
     
-    @staticmethod
+    '''@staticmethod
     # Return whether a ship is placed diagonally or not.
     def _is_diagonal(stern_x, bow_x, stern_y, bow_y):
         if stern_x != bow_x and stern_y != bow_y:
             print("Ships must be placed horizontally or vertically\n")
             return True
         
-        return False
+        return False'''
 
     @staticmethod
     # Return if the coordinate is valid.

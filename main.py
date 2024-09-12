@@ -46,6 +46,7 @@ def main():
 
         # NOTE : ATTACK LOGIC HERE
         #app.prompt_attack()
+        break
 
 if __name__ == "__main__":
     main()

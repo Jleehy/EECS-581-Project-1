@@ -10,10 +10,16 @@ class Ship:
     def _populate_indices(self, length, start_i, start_j, vert):
         if vert:
             for i in range(length):
-                self.indices.add((start_i + i, start_j))  # add tuple to the set
+                self.indices.add((start_i, start_j + i))  # add tuple to the set
         else:
             for i in range(length):
-                self.indices.add((start_i, start_j + i))  # add tuple to the set
+                self.indices.add((start_i + i, start_j))  # add tuple to the set
             
     def __repr__(self):
         return f"Indices: {self.indices}"
+    
+    def _overlaps(self, otherShip):
+        for coor in otherShip.indices:
+            if coor in self.indices:
+                return True
+        return False
