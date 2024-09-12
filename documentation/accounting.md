@@ -30,7 +30,7 @@
 
 **Jacob Leehy**
 
-9/10/24 - 15min
+9/9/24 - 15min
 
 - Created GitHub repo
 
