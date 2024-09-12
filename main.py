@@ -29,7 +29,8 @@ def prompt_ship_coordinate(ship_number, part, player):
         check_quit(coord)
         if player.is_valid_coordinate(coord[0], coord[1:]):
             return coord
-        
+
+# Return whether a ship is placed diagonally or not.
 def is_diagonal(stern_x, bow_x, stern_y, bow_y):
     if stern_x != bow_x and stern_y != bow_y:
        print("Ships must be placed horizontally or vertically\n")
