@@ -7,7 +7,7 @@ class Board:
         self.matrix = [[0] * 10 for _ in range(10)] # Initialize a 10x10 matrix with zeroes
         self.ships = [] # Store ships placed on the board.
 
-    def isValidMove(self): #used to verify no overlap
+    def is_valid_move(self): #used to verify no overlap
         # Iterate through each pair of ships
         for i in range(len(self.ships)):
             for j in range(i + 1, len(self.ships)):
@@ -26,7 +26,7 @@ class Board:
             new_ship = Ship(size, stern_x, stern_y, vert = False) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
-            if not self.isValidMove(): #---------------------------------------verifies no overlap
+            if not self.is_valid_move(): #---------------------------------------verifies no overlap
                 del new_ship
                 self.ships.pop()
                 return False
@@ -44,7 +44,7 @@ class Board:
             new_ship = Ship(size, stern_x, stern_y, vert = True) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
-            if not self.isValidMove(): #-----------------------------------------verifies no overlap
+            if not self.is_valid_move(): #-----------------------------------------verifies no overlap
                 del new_ship
                 self.ships.pop()
                 return False
