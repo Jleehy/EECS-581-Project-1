@@ -8,7 +8,13 @@ class App:
         self.num_ships = num_ships
 
     # Place a ship on a player's board and validate placement.
-    def place_ship(self, player, stern_x, stern_y, bow_x, bow_y, ship_size):
+    def place_ship(self, player, stern, bow, ship_size):
+        # Create indices for the stern and bow.
+        # Note: There is no need to wrap this in a try-except because
+        # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
+        # to integers.
+        stern_x, stern_y, bow_x, bow_y = self.literals_to_indices(stern, bow)
+         
         # Verify the ship placement is correct.
         if self._is_diagonal(stern_x, bow_x, stern_y, bow_y):
             return False
@@ -23,6 +29,15 @@ class App:
             return False
         
         return True # Ship placed successfully.
+    
+    # Attack a cell on a player's board.
+    def attack(self, attacker, defender, pos):
+        # Cast the input initially for easier error checking
+        col, row = ord(pos[0]), int(pos[1:])
+
+        col_index, row_index = self._is_valid_coordinate(col, row) # Convert literal to an index.
+
+        defender.attack(col_index, row_index) # Attack player's board on the indices.
 
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
@@ -39,6 +54,15 @@ class App:
             print(row_str)
 
         print()
+
+    @staticmethod
+    # Convert literal coordinates to indices.
+    def literals_to_indices(stern, bow):
+        stern_x = int(stern[1:]) - 1
+        stern_y = ord(stern[0]) - ord('A')
+        bow_x = int(bow[1:]) - 1
+        bow_y = ord(bow[0]) - ord('A')
+        return stern_x, stern_y, bow_x, bow_y
 
     @staticmethod
     # Check if the program should exit.
