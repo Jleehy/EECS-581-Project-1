@@ -25,6 +25,8 @@ def is_valid_coordinate(x, y):
         print("Y-coordinate must be an integer in the range 1 - 10\n")
         return False
 
+
+
     return True
 
 def main():
@@ -32,9 +34,11 @@ def main():
     player1 = Board("Player 1")
     player2 = Board("Player 2")
 
+    num_ships = int(input("Enter the number of ships: "))
+
     # Note: num_ships is currently unused.
     # Create the Battleship app.
-    app = App(player1, player2, num_ships = 2)
+    app = App(player1, player2, num_ships)
 
     # Give each player a chance to place their ships.
     for player in [player1, player2]:
@@ -50,7 +54,7 @@ def main():
 
                 # Get the coordinate for the stern (rear) of the ship.
                 while True:
-                    stern = input(f"Coordinate for the rear of ship {ship + 1}: ").strip().upper()[:3]
+                    stern = input(f"Coordinate for the rear of ship {ship + 1}, with dimensions 1x{ship+1}: ").strip().upper()[:3]
                     check_quit(stern)
                     if is_valid_coordinate(stern[0], stern[1:]):
                         break
@@ -77,7 +81,12 @@ def main():
                     continue
 
                 # Place the player's ship on their board.
-                player.place_ship(stern_x, stern_y, bow_x, bow_y)
+                # Verifies that the ship length is correct
+                if ((stern_x == bow_x) and (abs(stern_y - bow_y) == (ship))) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == (ship))):
+                    player.place_ship(stern_x, stern_y, bow_x, bow_y)
+                else:
+                    print(f"The length of ship {ship+1} must be {ship+1}.")
+                    continue
                 break
 
     # Begin the game loop.
@@ -86,6 +95,8 @@ def main():
 
         action = input("Enter your action: ")
         check_quit(action)
+
+
 
 
 if __name__ == "__main__":
