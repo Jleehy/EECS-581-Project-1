@@ -5,15 +5,6 @@ class App:
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships
 
-    # Attack a cell on a player's board given literal coordinates.
-    def attack(self, attacker, defender, pos):
-        # Cast the input initially for easier error checking
-        col, row = ord(pos[0]), int(pos[1:])
-
-        col_index, row_index = self._is_valid_coordinate(col, row) # Convert literal to an index.
-
-        defender.attack(col_index, row_index) # Attack player's board on the indices.
-
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
         column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
