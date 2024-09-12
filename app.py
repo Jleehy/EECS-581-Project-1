@@ -3,6 +3,7 @@ class App:
         self.config = {0: "□", 1: "■", 2: "•", 3: "○"}  # 0: blank, 1: ship, 2: hit, 3: miss
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
+        self.num_ships = num_ships
 
     # Attack a cell on a player's board given literal coordinates.
     def attack(self, attacker, defender, pos):

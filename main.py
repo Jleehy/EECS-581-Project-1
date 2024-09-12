@@ -8,6 +8,7 @@ def check_quit(action):
     if action[0].upper() == 'Q':
         sys.exit("\nExiting...\n")
 
+# Prompt the user for the number of ships to play with, ensuring a valid input.
 def prompt_ships():
     while True:
         num_ships = input("Enter the number of ships: ")
@@ -25,9 +26,8 @@ def main():
     player1 = Board("Player 1")
     player2 = Board("Player 2")
 
-    num_ships = prompt_ships()
+    num_ships = prompt_ships() 
     
-    # Note: num_ships is currently unused.
     # Create the Battleship app.
     app = App(player1, player2, num_ships)
 
@@ -40,8 +40,8 @@ def main():
             app.print_board(player)
 
             while True:
-                stern = ""
-                bow = ""
+                stern = "" # Rear coordinate of the ship.
+                bow = "" # Front coordinate of the ship.
 
                 # Get the coordinate for the stern (rear) of the ship.
                 while True:
