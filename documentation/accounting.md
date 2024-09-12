@@ -21,6 +21,16 @@
 - Moved the accounting of person-hours from Google Docs to the repository.
 
 **Jacob Leehy**
+9/10/24 - 15min
+
+- Created GitHub repo
+
+9/12/24 - 2 hr
+
+- Added ship overlap detection to board.hs and main.hs.
+- Added ship count selection and checks to ensure that the count is between 1 and 5.
+- Added ship length detection to ensure that the ship dimensions are valid.
+- Improved GUI slightly.
 
 **Mario Simental** \
 9/11/24 - 3h
