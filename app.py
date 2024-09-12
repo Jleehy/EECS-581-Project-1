@@ -6,10 +6,7 @@ class App:
         # Todo: Add current_player
         
         # NOTE: Currently unused logic. Neccessary for main game loop.
-        if not(1 <= num_ships <=5):
-            raise ValueError("Invalid number of ships\n")
-        else:
-            self.num_ships = num_ships
+        self.num_ships = num_ships
 
     # Attack a cell on a player's board given literal coordinates.
     def attack(self, attacker, defender, pos):
