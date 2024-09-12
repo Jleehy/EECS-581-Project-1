@@ -1,5 +1,5 @@
 from board import Board
-from interface import Interface
+from app import Interface
 
 def main():
     #main game loop
