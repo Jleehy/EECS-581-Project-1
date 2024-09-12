@@ -2,7 +2,8 @@ from ship import Ship
 
 class Board:
 
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.matrix = [[0] * 10 for _ in range(10)] # Initialize a 10x10 matrix with zeroes
         self.ships = [] # Store ships placed on the board.
 
@@ -54,7 +55,3 @@ class Board:
         
     def __repr__(self):
         return f"{self.matrix}"
-    
-    
-
-    

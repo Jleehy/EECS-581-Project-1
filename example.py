@@ -2,8 +2,8 @@ from board import Board
 from app import App
 
 def main():
-    player1 = Board() # Create a board object for Player 1.
-    player2 = Board() # Create a board object for Player 2.
+    player1 = Board("Player 1") # Create a board object for Player 1.
+    player2 = Board("Player 2") # Create a board object for Player 2.
 
     #NOTE: num_ships is currently unused
     app = App(player1, player2, num_ships=2) # Create an app object containing both players and the number of ships.
@@ -11,7 +11,7 @@ def main():
     print("PRINTING PLAYER 1 BOARD") # DEBUG PURPOSES
     app.print_board(player1) # Print Player 1's board.
     print("PLACED SHIP AT A1:C1 (0,0:0,2)") # DEBUG PURPOSES
-    app.place_ship(player1, "A1", "C1") # Place a ship at cell A1 to C1 on Player 1's board. (Should be horizontal)
+    app.place_ship(player1, "A10", "C10") # Place a ship at cell A1 to C1 on Player 1's board. (Should be horizontal)
     print("PRINTING PLAYER 1 BOARD") # DEBUG PURPOSES
     app.print_board(player1) # Print the new contents of Player 1's board.
     print("PLACED SHIP AT A3:C4 (2,0:3,0)") # DEBUG PURPOSES
