@@ -84,6 +84,7 @@ def main():
                 # Verifies that the ship length is correct
                 if ((stern_x == bow_x) and (abs(stern_y - bow_y) == (ship))) or ((stern_y == bow_y) and (abs(stern_x - bow_x) == (ship))):
                     if not player.place_ship(stern_x, stern_y, bow_x, bow_y):
+                        print("Ships cannot overlap.")
                         continue
                 else:
                     print(f"The length of ship {ship+1} must be {ship+1}.")
