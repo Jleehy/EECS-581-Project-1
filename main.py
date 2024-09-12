@@ -8,7 +8,9 @@ def check_quit(action):
     if action[0].upper() == 'Q':
         sys.exit("\nExiting...\n")
 
+# Moved to board.py
 # Return if the coordinate is valid.
+'''
 def is_valid_coordinate(x, y):
     # Valid x-coordinates: A - J.
     if x < 'A' or x > 'J':
@@ -25,9 +27,8 @@ def is_valid_coordinate(x, y):
         print("Y-coordinate must be an integer in the range 1 - 10\n")
         return False
 
-
-
     return True
+'''
 
 def main():
     # Create each player's board.
@@ -47,7 +48,7 @@ def main():
         else:
             print("The number of ships must be an integer between 1 and 5.")
 
-
+ 
         # Note: num_ships is currently unused.
         # Create the Battleship app.
         app = App(player1, player2, num_ships)
@@ -68,14 +69,16 @@ def main():
                 while True:
                     stern = input(f"Coordinate for the rear of ship {ship + 1}, with dimensions 1x{ship+1}: ").strip().upper()[:3]
                     check_quit(stern)
-                    if is_valid_coordinate(stern[0], stern[1:]):
+                    # player = reference to board object
+                    # move coordinate check to board, call player.is_valid_coord
+                    if player.is_valid_coordinate(stern[0], stern[1:]):
                         break
 
                 # Get the coordinate for the bow (front) of the ship.
                 while True:
                     bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
                     check_quit(bow)
-                    if is_valid_coordinate(bow[0], bow[1:]):
+                    if player.is_valid_coordinate(bow[0], bow[1:]):
                         break
 
                 # Create indices for the stern and bow.

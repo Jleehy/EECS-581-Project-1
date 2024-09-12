@@ -32,3 +32,4 @@ class App:
             print(row_str)
 
         print()
+

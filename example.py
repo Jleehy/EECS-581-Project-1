@@ -11,11 +11,11 @@ def main():
     print("PRINTING PLAYER 1 BOARD") # DEBUG PURPOSES
     app.print_board(player1) # Print Player 1's board.
     print("PLACED SHIP AT A1:C1 (0,0:0,2)") # DEBUG PURPOSES
-    app.place_ship(player1, "A10", "C10") # Place a ship at cell A1 to C1 on Player 1's board. (Should be horizontal)
+    #app.place_ship(player1, "A10", "C10") # Place a ship at cell A1 to C1 on Player 1's board. (Should be horizontal)
     print("PRINTING PLAYER 1 BOARD") # DEBUG PURPOSES
     app.print_board(player1) # Print the new contents of Player 1's board.
     print("PLACED SHIP AT A3:C4 (2,0:3,0)") # DEBUG PURPOSES
-    app.place_ship(player1, "A3", "A4") # Place a ship at cell A3 to A4 on Player 1's board. (Should be vertical)
+    #app.place_ship(player1, "A3", "A4") # Place a ship at cell A3 to A4 on Player 1's board. (Should be vertical)
 
     #app.place_ship(player1, "A1", "B2") # DEBUG : # Place a ship at cell A1 to B2 on Player 1's board. (Should be invalid)
 
