@@ -87,8 +87,8 @@ def main():
                     print(f"The length of ship {ship+1} must be {ship+1}.")
                     continue
                 break
-            
-        app.print_board(player)
+
+        app.print_board(player) # Ensure board prints on last turn.
 
     # Begin the game loop.
     while True:
