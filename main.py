@@ -6,7 +6,7 @@ from board import Board
 # Check if the program should exit.
 def check_quit(action):
     if action[0].upper() == 'Q':
-        sys.exit("Exiting...\n")
+        sys.exit("\nExiting...\n")
 
 # Return if the coordinate is valid.
 def is_valid_coordinate(x, y):
@@ -36,36 +36,36 @@ def main():
     # Create the Battleship app.
     app = App(player1, player2, num_ships = 2)
 
+    # Give each player a chance to place their ships.
+    for player in [player1, player2]:
+        print(player.name + "'s turn to place their ships\n")
+
+        # For each ship in the player's arsenal.
+        for ship in range(app.num_ships):
+            app.print_board(player)
+
+            stern = ""
+            bow = ""
+
+            # Get the coordinate for the stern (rear) of the ship.
+            while True:
+                stern = input(f"Coordinate for the rear of ship {ship + 1}: ").strip().upper()[:3]
+                check_quit(stern)
+                if is_valid_coordinate(stern[0], stern[1:]):
+                    break
+
+            # Get the coordinate for the bow (front) of the ship.
+            while True:
+                bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
+                check_quit(bow)
+                if is_valid_coordinate(bow[0], bow[1:]):
+                    break
+
+            # Place the ship on the player's board.
+            player.place_ship(int(stern[1:]) - 1, ord(stern[0]) - ord('A'), int(bow[1:]) - 1, ord(bow[0]) - ord('A'))
+
     # Begin the game loop.
     while True:
-        # Give each player a chance to place their ships.
-        for player in [player1, player2]:
-            print(player.name + "'s turn to place their ships\n")
-
-            # For each ship in the player's arsenal.
-            for ship in range(app.num_ships):
-                app.print_board(player)
-
-                stern = ""
-                bow = ""
-
-                # Get the coordinate for the stern (rear) of the ship.
-                while True:
-                    stern = input(f"Coordinate for the rear of ship {ship + 1}: ").strip().upper()[:3]
-                    check_quit(stern)
-                    if is_valid_coordinate(stern[0], stern[1:]):
-                        break
-
-                # Get the coordinate for the bow (front) of the ship.
-                while True:
-                    bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
-                    check_quit(bow)
-                    if is_valid_coordinate(bow[0], bow[1:]):
-                        break
-
-                # Place the ship on the player's board.
-                player.place_ship(int(stern[1:]) - 1, ord(stern[0]) - ord('A'), int(bow[1:]) - 1, ord(bow[0]) - ord('A'))
-
         app.print_board(player1)
 
         action = input("Enter your action: ")
