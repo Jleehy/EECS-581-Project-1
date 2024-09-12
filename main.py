@@ -44,25 +44,41 @@ def main():
         for ship in range(app.num_ships):
             app.print_board(player)
 
-            stern = ""
-            bow = ""
-
-            # Get the coordinate for the stern (rear) of the ship.
             while True:
-                stern = input(f"Coordinate for the rear of ship {ship + 1}: ").strip().upper()[:3]
-                check_quit(stern)
-                if is_valid_coordinate(stern[0], stern[1:]):
-                    break
+                stern = ""
+                bow = ""
 
-            # Get the coordinate for the bow (front) of the ship.
-            while True:
-                bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
-                check_quit(bow)
-                if is_valid_coordinate(bow[0], bow[1:]):
-                    break
+                # Get the coordinate for the stern (rear) of the ship.
+                while True:
+                    stern = input(f"Coordinate for the rear of ship {ship + 1}: ").strip().upper()[:3]
+                    check_quit(stern)
+                    if is_valid_coordinate(stern[0], stern[1:]):
+                        break
 
-            # Place the ship on the player's board.
-            player.place_ship(int(stern[1:]) - 1, ord(stern[0]) - ord('A'), int(bow[1:]) - 1, ord(bow[0]) - ord('A'))
+                # Get the coordinate for the bow (front) of the ship.
+                while True:
+                    bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
+                    check_quit(bow)
+                    if is_valid_coordinate(bow[0], bow[1:]):
+                        break
+
+                # Create indices for the stern and bow.
+                # Note: There is no need to wrap this in a try-except because
+                # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
+                # to integers.
+                stern_x = int(stern[1:]) - 1
+                stern_y = ord(stern[0]) - ord('A')
+                bow_x = int(bow[1:]) - 1
+                bow_y = ord(bow[0]) - ord('A')
+
+                # Don't allow diagonal placement of ships.
+                if stern_x != bow_x and stern_y != bow_y:
+                    print("Ships must be placed horizontally or vertically\n")
+                    continue
+
+                # Place the player's ship on their board.
+                player.place_ship(stern_x, stern_y, bow_x, bow_y)
+                break
 
     # Begin the game loop.
     while True:

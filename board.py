@@ -8,34 +8,29 @@ class Board:
         self.ships = [] # Store ships placed on the board.
 
     # Place a ship on board given indices.
-    def place_ship(self, start_i, start_j, end_i, end_j):      
-
-        # Don't allow diagonal ship placement.
-        if not start_i == end_i and not start_j == end_j:
-            raise ValueError("Ships must be placed either horizontally or vertically.")
-
+    def place_ship(self, stern_x, stern_y, bow_x, bow_y):      
         # Horizontal ship placement
-        if start_i == end_i: 
+        if stern_x == bow_x: 
             print("PLACED HORIZONTALLY") # DEBUG PURPOSES
-            size = abs(start_j - end_j) + 1
+            size = abs(stern_y - bow_y) + 1
 
-            new_ship = Ship(size, start_i, start_j, vert=False) # Create a ship object with i,j indices and whether its placed vertically. 
+            new_ship = Ship(size, stern_x, stern_y, vert = False) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
              # Iterate through the x axis.
-            for current_j in range(min(start_j, end_j), max(start_j, end_j) + 1):
-                self._update_matrix(start_i, current_j, 1) # Could be overkill but maybe we want future logic.
+            for y in range(min(stern_y, bow_y), max(stern_y, bow_y) + 1):
+                self._update_matrix(stern_x, y, 1) # Could be overkill but maybe we want future logic.
         # Vertical ship placement
-        elif start_j == end_j: 
+        elif stern_y == bow_y: 
             print("PLACED VERTICALLY") # DEBUG PURPOSES
-            size = abs(start_i - end_i) + 1
+            size = abs(stern_x - bow_x) + 1
 
-            new_ship = Ship(size, start_i, start_j, vert=True) # Create a ship object with i,j indices and whether its placed vertically. 
+            new_ship = Ship(size, stern_x, stern_y, vert = True) # Create a ship object with i,j indices and whether its placed vertically. 
             self.ships.append(new_ship) # Store the ship
 
             # Iterate through the y axis.
-            for current_i in range(min(start_i, end_i), max(start_i, end_i) + 1):
-                self._update_matrix(current_i, start_j, 1) # Could be overkill but maybe we want future logic.
+            for x in range(min(stern_x, bow_x), max(stern_x, bow_x) + 1):
+                self._update_matrix(x, stern_y, 1) # Could be overkill but maybe we want future logic.
 
     def attack(self, i, j):
         hit = False  # Flag to track if a hit occurs.
