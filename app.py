@@ -33,11 +33,13 @@ class App:
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
         # Cast the input initially for easier error checking
-        col, row = ord(pos[0]), int(pos[1:])
+        """
+        col, row = self.literals_to_indices(pos)
 
         col_index, row_index = self._is_valid_coordinate(col, row) # Convert literal to an index.
 
         defender.attack(col_index, row_index) # Attack player's board on the indices.
+        """
 
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
@@ -57,12 +59,15 @@ class App:
 
     @staticmethod
     # Convert literal coordinates to indices.
-    def literals_to_indices(stern, bow):
+    def literals_to_indices(stern, bow=None):
         stern_x = int(stern[1:]) - 1
         stern_y = ord(stern[0]) - ord('A')
-        bow_x = int(bow[1:]) - 1
-        bow_y = ord(bow[0]) - ord('A')
-        return stern_x, stern_y, bow_x, bow_y
+        if bow == None:
+            return stern_x, stern_y
+        else:
+            bow_x = int(bow[1:]) - 1
+            bow_y = ord(bow[0]) - ord('A')
+            return stern_x, stern_y, bow_x, bow_y
 
     @staticmethod
     # Check if the program should exit.

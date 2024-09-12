@@ -53,7 +53,8 @@ class Board:
             return True
         #----------------------------------------------
 
-    def attack(self, i, j):
+    def attack(self, stern_x, stern_y):
+        """
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)
         for ship in self.ships:
@@ -64,6 +65,7 @@ class Board:
                 break
         if not hit:
             print("MISS")
+        """
     
      # Could be overkill but maybe we want future logic.
     def _update_matrix(self, i, j, val):
