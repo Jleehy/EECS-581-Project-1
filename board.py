@@ -20,7 +20,6 @@ class Board:
     def place_ship(self, stern_x, stern_y, bow_x, bow_y):      
         # Horizontal ship placement
         if stern_x == bow_x: 
-            print("PLACED HORIZONTALLY") # DEBUG PURPOSES
             size = abs(stern_y - bow_y) + 1
 
             new_ship = Ship(size, stern_x, stern_y, vert = False) # Create a ship object with i,j indices and whether its placed vertically. 
@@ -38,7 +37,6 @@ class Board:
         
         # Vertical ship placement
         elif stern_y == bow_y: 
-            print("PLACED VERTICALLY") # DEBUG PURPOSES
             size = abs(stern_x - bow_x) + 1
 
             new_ship = Ship(size, stern_x, stern_y, vert = True) # Create a ship object with i,j indices and whether its placed vertically. 
@@ -54,7 +52,7 @@ class Board:
                 self._update_matrix(x, stern_y, 1) # Could be overkill but maybe we want future logic.
             return True
         #----------------------------------------------
-        
+
     def attack(self, i, j):
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)

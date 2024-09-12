@@ -12,6 +12,7 @@ def check_quit(action):
 def prompt_ships():
     while True:
         num_ships = input("Enter the number of ships: ")
+        check_quit(num_ships)
         if num_ships.isnumeric():
             num_ships = int(num_ships)
             if not (num_ships > 0 and num_ships < 6):
@@ -20,6 +21,14 @@ def prompt_ships():
                 return num_ships
         else:
             print("The number of ships must be an integer between 1 and 5.")
+
+# Prompt the user for a ship coordinate, ensuring a valid input.
+def prompt_ship_coordinate(ship_number, part, player):
+    while True:
+        coord = input(f"Coordinate for the {part} of ship {ship_number + 1}: ").strip().upper()[:3]
+        check_quit(coord)
+        if player.is_valid_coordinate(coord[0], coord[1:]):
+            return coord
 
 def main():
     # Create each player's board.
@@ -33,31 +42,15 @@ def main():
 
     # Give each player a chance to place their ships.
     for player in [player1, player2]:
-        print(player.name + "'s turn to place their ships\n")
+        print(player.name + "'s turn to place their ships")
 
         # For each ship in the player's arsenal.
         for ship in range(app.num_ships):
             app.print_board(player)
 
             while True:
-                stern = "" # Rear coordinate of the ship.
-                bow = "" # Front coordinate of the ship.
-
-                # Get the coordinate for the stern (rear) of the ship.
-                while True:
-                    stern = input(f"Coordinate for the rear of ship {ship + 1}, with dimensions 1x{ship+1}: ").strip().upper()[:3]
-                    check_quit(stern)
-                    # player = reference to board object
-                    # move coordinate check to board, call player.is_valid_coord
-                    if player.is_valid_coordinate(stern[0], stern[1:]):
-                        break
-
-                # Get the coordinate for the bow (front) of the ship.
-                while True:
-                    bow = input(f"Coordinate for the front of ship {ship + 1}: ").strip().upper()[:3]
-                    check_quit(bow)
-                    if player.is_valid_coordinate(bow[0], bow[1:]):
-                        break
+                stern = prompt_ship_coordinate(ship, "rear", player) # Rear coordinate of the ship.
+                bow = prompt_ship_coordinate(ship, "front", player) # Front coordinate of the ship.
 
                 # Create indices for the stern and bow.
                 # Note: There is no need to wrap this in a try-except because
@@ -90,9 +83,6 @@ def main():
 
         action = input("Enter your action: ")
         check_quit(action)
-
-
-
 
 if __name__ == "__main__":
     main()
