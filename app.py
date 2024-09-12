@@ -1,11 +1,11 @@
 import sys
 
 class App:
-    def __init__(self, player1, player2):
+    def __init__(self, player1, player2, num_ships=0):
         self.config = {0: "□", 1: "■", 2: "•", 3: "○"}  # 0: blank, 1: ship, 2: hit, 3: miss
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
-        self.num_ships = 0
+        self.num_ships = num_ships
 
     @staticmethod
     # Check if the program should exit.

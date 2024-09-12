@@ -10,6 +10,7 @@ def main():
     # Create the Battleship app.
     app = App(player1, player2)
 
+    # Prompt the user to enter the number of ships to be played.
     app.prompt_num_ships()
 
     # Give each player a chance to place their ships.
@@ -19,7 +20,7 @@ def main():
         # For each ship in the player's arsenal.
         for ship in range(app.num_ships):
             app.print_board(player)
-            
+
             while True:
                 # If the ship size is 1, assign both bow and stern to the same coordinate.
                 if ship == 0:
@@ -42,6 +43,10 @@ def main():
                     break
 
         app.print_board(player) # Ensure board prints on last turn.
+
+        # Ask the player if they are ready to turn the device over to the second player.
+        input(f"{player.name}, are you ready to turn the device over to the next player? Press Enter to continue...")
+        # NOTE : MISSING TERMINAL CLEAR LOGIC
 
     # Begin the game loop.
     while True:
