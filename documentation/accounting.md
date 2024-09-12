@@ -54,3 +54,10 @@
 ---
 
 **Matthew Sullivan**
+9/11/24 - 1h
+- Implemented typing logic for coordinate input
+- Implemented checks to ensure that the coordinates are valid
+
+9/12/24 - 30min
+- Moved coordinate check logic from main.py to board.py
+
