@@ -1,13 +1,15 @@
 # Accounting of Person-Hours
 
-**Team** \
+**Team**
+
 9/10/24 - 1h
 
 - Held a team meeting to discuss the project requirements, create a high-level project design, determine person-hour estimates, and assign tasks.
 
 **Steve Gan**
 
-**Sean Hammell** \
+**Sean Hammell**
+
 9/11/24 - 1.5h
 
 - Created the main game loop.
@@ -33,7 +35,8 @@
 - Added ship length detection to ensure that the ship dimensions are valid.
 - Improved GUI slightly.
 
-**Mario Simental** \
+**Mario Simental**
+
 9/11/24 - 3h
 
 - Implemented logic for multiple ship sizes and initial structure.
