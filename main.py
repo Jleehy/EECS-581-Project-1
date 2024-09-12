@@ -46,6 +46,7 @@ def main():
 
         # Ask the player if they are ready to turn the device over to the second player.
         input(f"{player.name}, are you ready to turn the device over to the next player? Press Enter to continue...")
+        app.check_quit(action)
         # NOTE : MISSING TERMINAL CLEAR LOGIC
 
     # Begin the game loop.

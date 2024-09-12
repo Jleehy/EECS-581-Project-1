@@ -9,7 +9,6 @@ class App:
 
     # Place a ship on a player's board and validate placement.
     def place_ship(self, player, stern_x, stern_y, bow_x, bow_y, ship_size):
-
         # Verify the ship placement is correct.
         if self._is_diagonal(stern_x, bow_x, stern_y, bow_y):
             return False
