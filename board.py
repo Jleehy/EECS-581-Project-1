@@ -54,10 +54,7 @@ class Board:
                 self._update_matrix(x, stern_y, 1) # Could be overkill but maybe we want future logic.
             return True
         #----------------------------------------------
-
-      
-
-
+        
     def attack(self, i, j):
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)
@@ -77,7 +74,6 @@ class Board:
     def __repr__(self):
         return f"{self.matrix}"
     
-
     # Return if the coordinate is valid.
     def is_valid_coordinate(self, x, y):
         # Valid x-coordinates: A - J.

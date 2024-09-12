@@ -8,50 +8,28 @@ def check_quit(action):
     if action[0].upper() == 'Q':
         sys.exit("\nExiting...\n")
 
-# Moved to board.py
-# Return if the coordinate is valid.
-'''
-def is_valid_coordinate(x, y):
-    # Valid x-coordinates: A - J.
-    if x < 'A' or x > 'J':
-        print("X-coordinate must be in the range A - J\n")
-        return False
-
-    # Protect against ValueErrors since y may not be an int.
-    try:
-        # Valid y-coordinates: 1 - 10.
-        if int(y) < 1 or int(y) > 10:
-            print("Y-coordinate must be in the range 1 - 10\n")
-            return False
-    except ValueError as e:
-        print("Y-coordinate must be an integer in the range 1 - 10\n")
-        return False
-
-    return True
-'''
-
-def main():
-    # Create each player's board.
-    player1 = Board("Player 1")
-    player2 = Board("Player 2")
-
-    ships_okay = True
-    num_ships = 0
-    while ships_okay:
+def prompt_ships():
+    while True:
         num_ships = input("Enter the number of ships: ")
         if num_ships.isnumeric():
             num_ships = int(num_ships)
             if not (num_ships > 0 and num_ships < 6):
                 print("The number of ships must be an integer between 1 and 5.")
             else:
-                ships_okay = False
+                return num_ships
         else:
             print("The number of ships must be an integer between 1 and 5.")
 
- 
-        # Note: num_ships is currently unused.
-        # Create the Battleship app.
-        app = App(player1, player2, num_ships)
+def main():
+    # Create each player's board.
+    player1 = Board("Player 1")
+    player2 = Board("Player 2")
+
+    num_ships = prompt_ships()
+    
+    # Note: num_ships is currently unused.
+    # Create the Battleship app.
+    app = App(player1, player2, num_ships)
 
     # Give each player a chance to place their ships.
     for player in [player1, player2]:
