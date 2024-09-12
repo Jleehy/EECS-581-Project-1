@@ -6,7 +6,11 @@
 
 - Held a team meeting to discuss the project requirements, create a high-level project design, determine person-hour estimates, and assign tasks.
 
+---
+
 **Steve Gan**
+
+---
 
 **Sean Hammell**
 
@@ -22,6 +26,8 @@
 - Moved the estimation of person-hours from Google Docs to the repository.
 - Moved the accounting of person-hours from Google Docs to the repository.
 
+---
+
 **Jacob Leehy**
 
 9/10/24 - 15min
@@ -35,6 +41,8 @@
 - Added ship length detection to ensure that the ship dimensions are valid.
 - Improved GUI slightly.
 
+---
+
 **Mario Simental**
 
 9/11/24 - 3h
@@ -42,5 +50,7 @@
 - Implemented logic for multiple ship sizes and initial structure.
 - Implemented ship count selection, overlap checking, and length checking.
 - Updated the UI for clarity.
+
+---
 
 **Matthew Sullivan**
