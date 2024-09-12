@@ -3,6 +3,7 @@ class App:
         self.config = {0: "□", 1: "■", 2: "•", 3: "○"}  # 0: blank, 1: ship, 2: hit, 3: miss
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
+        # Todo: Add current_player
         
         # NOTE: Currently unused logic. Neccessary for main game loop.
         if not(1 <= num_ships <=5):
@@ -44,7 +45,7 @@ class App:
 
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
-        column_headers = "   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
+        column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
         print(column_headers)
 
         # create the formatted board with row numbers and symbols
@@ -55,3 +56,5 @@ class App:
             else:
                 row_str = f"{i+1:2} " + " | ".join(self.config[cell] for cell in row)
             print(row_str)
+
+        print()
