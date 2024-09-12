@@ -34,15 +34,16 @@ def main():
     player1 = Board("Player 1")
     player2 = Board("Player 2")
 
+    ships_okay = True
     num_ships = 0
-    while True:
+    while ships_okay:
         num_ships = input("Enter the number of ships: ")
         if num_ships.isnumeric():
             num_ships = int(num_ships)
-            if not (num_ships > 0 and num_ships < 6):
+            if not (num_ships > 0 or num_ships < 6):
                 print("The number of ships must be an integer between 1 and 5.")
             else:
-                break
+                ships_okay = False
         else:
             print("The number of ships must be an integer between 1 and 5.")
 
