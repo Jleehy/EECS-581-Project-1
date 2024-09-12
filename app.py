@@ -67,6 +67,8 @@ class App:
     @staticmethod
     # Check if the program should exit.
     def check_quit(action):
+        if len(action) == 0:
+            return
         if action[0].upper() == 'Q':
             sys.exit("\nExiting...\n")
 
