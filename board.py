@@ -71,22 +71,3 @@ class Board:
         
     def __repr__(self):
         return f"{self.matrix}"
-    
-    # Return if the coordinate is valid.
-    def is_valid_coordinate(self, x, y):
-        # Valid x-coordinates: A - J.
-        if x < 'A' or x > 'J':
-            print("X-coordinate must be in the range A - J\n")
-            return False
-
-        # Protect against ValueErrors since y may not be an int.
-        try:
-            # Valid y-coordinates: 1 - 10.
-            if int(y) < 1 or int(y) > 10:
-                print("Y-coordinate must be in the range 1 - 10\n")
-                return False
-        except ValueError as e:
-            print("Y-coordinate must be an integer in the range 1 - 10\n")
-            return False
-
-        return True
