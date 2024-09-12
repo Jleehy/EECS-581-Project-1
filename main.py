@@ -34,11 +34,22 @@ def main():
     player1 = Board("Player 1")
     player2 = Board("Player 2")
 
-    num_ships = int(input("Enter the number of ships: "))
+    num_ships = 0
+    while True:
+        num_ships = input("Enter the number of ships: ")
+        if num_ships.isnumeric():
+            num_ships = int(num_ships)
+            if not (num_ships > 0 and num_ships < 6):
+                print("The number of ships must be an integer between 1 and 5.")
+            else:
+                break
+        else:
+            print("The number of ships must be an integer between 1 and 5.")
 
-    # Note: num_ships is currently unused.
-    # Create the Battleship app.
-    app = App(player1, player2, num_ships)
+
+        # Note: num_ships is currently unused.
+        # Create the Battleship app.
+        app = App(player1, player2, num_ships)
 
     # Give each player a chance to place their ships.
     for player in [player1, player2]:
