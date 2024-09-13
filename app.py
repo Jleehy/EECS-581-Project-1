@@ -2,8 +2,13 @@ import sys
 
 class App:
     def __init__(self, player1, player2, num_ships=0):
-        # 0: blank, 1 - 5: ships of different colors, 6: red hit, 4: miss
-        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m", 7: "○"} 
+        # 0: blank, 1 - 5: ships of different colors, 6: red hit, 7: white miss
+        # 1: blue
+        # 2: green
+        # 3: yellow
+        # 4: light purple
+        # 5: cyan
+        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m", 7: "■"} 
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships
