@@ -59,7 +59,8 @@
 - Implemented ship count selection, overlap checking, and length checking.
 - Updated the UI for clarity.
 
-9/12/24 - 3h
+9/11/24 - 3h
+
  -
 
 ---
