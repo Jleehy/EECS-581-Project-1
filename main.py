@@ -60,7 +60,15 @@ def main():
             print(f"HIT PLAYER 2 @ {pos}")
         if sink:
             print("SUNK PLAYERS SHIP OF SIZE X")
+
+        print("Player 2's turn")
+        print("Your Board")
+        app.print_board(player2)
+        print("Enemies Board")
+        app.print_board(player1, censored=True)
+
         break
+
 
 if __name__ == "__main__":
     main()
