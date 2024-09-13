@@ -32,9 +32,15 @@
 9/12/24 - 2.5h
 
 - Moved the check for diagonal ship placement into the ship placement loop.
-- Moved the estimation of person-hours from Google Docs to the repository.
+- Moved the estimation of person hours from Google Docs to the repository.
 - Moved the accounting of person-hours from Google Docs to the repository.
 - Added console clearing for (most) of the ship placement logic.
+
+9/13 - 1.5h
+
+- Modularized cursor logic.
+- Created a basic attack loop.
+- Added cursor commands to the attack loop to hide each player's information.
 
 ---
 
