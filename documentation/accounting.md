@@ -29,11 +29,12 @@
 - Added a function to quit the program using sys.exit.
 - Added input polling and error handling for ship placement.
 
-9/12/24 - 1h
+9/12/24 - 2.5h
 
 - Moved the check for diagonal ship placement into the ship placement loop.
 - Moved the estimation of person-hours from Google Docs to the repository.
 - Moved the accounting of person-hours from Google Docs to the repository.
+- Added console clearing for (most) of the ship placement logic.
 
 ---
 
