@@ -15,8 +15,8 @@ class App:
         # Note: There is no need to wrap this in a try-except because
         # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
         # to integers.
-        stern_x, stern_y, bow_x, bow_y = self.literals_to_indices(stern, bow)
-        return player.place_ship(stern_x, stern_y, bow_x, bow_y, ship_size) # player.place_ship checks for validity
+        stern_row, stern_col, bow_row, bow_col = self.literals_to_indices(stern, bow)
+        return player.place_ship(stern_row, stern_col, bow_row, bow_col, ship_size) # player.place_ship checks for validity
     
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
@@ -44,14 +44,14 @@ class App:
     @staticmethod
     # Convert literal coordinates to indices.
     def literals_to_indices(stern, bow=None):
-        stern_x = int(stern[1:]) - 1
-        stern_y = ord(stern[0]) - ord('A')
+        stern_row = int(stern[1:]) - 1
+        stern_col = ord(stern[0]) - ord('A')
         if bow == None:
-            return stern_x, stern_y
+            return stern_row, stern_col
         else:
-            bow_x = int(bow[1:]) - 1
-            bow_y = ord(bow[0]) - ord('A')
-            return stern_x, stern_y, bow_x, bow_y
+            bow_row = int(bow[1:]) - 1
+            bow_col = ord(bow[0]) - ord('A')
+            return stern_row, stern_col, bow_row, bow_col
 
     @staticmethod
     # Check if the program should exit.
@@ -84,15 +84,6 @@ class App:
             else:
                 print("The number of ships must be an integer between 1 and 5.")
     
-    '''@staticmethod
-    # Return whether a ship is placed diagonally or not.
-    def _is_diagonal(stern_x, bow_x, stern_y, bow_y):
-        if stern_x != bow_x and stern_y != bow_y:
-            print("Ships must be placed horizontally or vertically\n")
-            return True
-        
-        return False'''
-
     @staticmethod
     # Return if the coordinate is valid.
     def _is_valid_coordinate(x, y):

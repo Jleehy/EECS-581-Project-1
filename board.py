@@ -8,18 +8,18 @@ class Board:
         self.ships = [] # Store ships placed on the board.
 
     # Place a ship on board given indices. returns true if placed successfully, false if not.
-    def place_ship(self, stern_x, stern_y, bow_x, bow_y, correct_length):
+    def place_ship(self, stern_row, stern_col, bow_row, bow_col, correct_length):
         
         # Check if the ship is being placed diagonally.
-        if self.is_diagonal(stern_x, stern_y, bow_x, bow_y):
+        if self.is_diagonal(stern_row, stern_col, bow_row, bow_col):
             return False
 
         # Check if the ship is the correct length.
-        if not self.is_correct_length(stern_x, stern_y, bow_x, bow_y, correct_length):
+        if not self.is_correct_length(stern_row, stern_col, bow_row, bow_col, correct_length):
             return False
         
-        vert_bool = (stern_x == bow_x) # Determine if the ship is vertical or not.
-        new_ship = Ship(correct_length, stern_x, stern_y, vert=vert_bool) # Create a new ship.
+        vert_bool = (stern_row == bow_row) # Determine if the ship is vertical or not.
+        new_ship = Ship(correct_length, stern_row, stern_col, vert=vert_bool) # Create a new ship.
 
         # Check if the ship overlaps with other ships.
         if self.is_overlapping(new_ship):
@@ -28,14 +28,17 @@ class Board:
         self.ships.append(new_ship) # Put the ship in the ship array.
 
         if vert_bool: # If the ship is vertical, we update the board vertically to include the ship.
-            for y in range(min(stern_y, bow_y), max(stern_y, bow_y) + 1):
-                self._update_matrix(stern_x, y, correct_length)
+            for col in range(min(stern_col, bow_col), max(stern_col, bow_col) + 1):
+                self._update_matrix(stern_row, col, correct_length)
         else: # If the ship is vertical, we update the board vertically to include the ship.
-            for x in range(min(stern_x, bow_x), max(stern_x, bow_x) + 1):
-                self._update_matrix(x, stern_y, correct_length)
+            for row in range(min(stern_row, bow_row), max(stern_row, bow_row) + 1):
+                self._update_matrix(row, stern_col, correct_length)
+
         return True # Returns true only if ship was successfully placed.
     
     def attack(self, x, y):
+        """
+        #NOT UPDATED THIS WAS FOR DEBUG.PY
         hit = False  # Flag to track if a hit occurs.
         # Iterate through every stored ship (There could be a more efficient solution?)
         for ship in self.ships:
@@ -48,6 +51,7 @@ class Board:
                 break
         if not hit:
             print("MISS")
+        """
     
     # Checks if the ships overlap.
     def is_overlapping(self, new_ship):
@@ -58,8 +62,8 @@ class Board:
 
     @staticmethod
     # Checks if the ship is the correct length.
-    def is_correct_length(stern_x, stern_y, bow_x, bow_y, correct_length):
-        length = max(abs(stern_x - bow_x), abs(stern_y - bow_y)) + 1 # Calculate the length.
+    def is_correct_length(stern_row, stern_col, bow_row, bow_col, correct_length):
+        length = max(abs(stern_row - bow_row), abs(stern_col - bow_col)) + 1 # Calculate the length.
         if length != correct_length: # If the length isn't the intended length, tell user and return false.
             print(f"The length of ship must be {correct_length}.")
             return False
@@ -67,15 +71,15 @@ class Board:
 
     @staticmethod
     # Checks if the ship is diagonal, returns true if it is.
-    def is_diagonal(stern_x, stern_y, bow_x, bow_y):
-        if stern_x != bow_x and stern_y != bow_y:
+    def is_diagonal(stern_row, stern_col, bow_row, bow_col):
+        if stern_row != bow_row and stern_col != bow_col:
             print("Ships must be placed horizontally or vertically\n")
             return True
         return False
 
-     # Could be overkill but maybe we want future logic.
-    def _update_matrix(self, i, j, val):
-        self.matrix[i][j] = val
+    # Could be overkill but maybe we want future logic.
+    def _update_matrix(self, row, col, val):
+        self.matrix[row][col] = val
         
     def __repr__(self):
         return f"{self.matrix}"
