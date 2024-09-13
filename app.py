@@ -20,10 +20,13 @@ class App:
     
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
+        """
+        #NOT UPDATED THIS WAS FOR DEBUG.PY
         # Cast the input initially for easier error checking
         x, y = self.literals_to_indices(pos)
 
         defender.attack(x, y) # Attack player's board on the indices.
+        """
         
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
