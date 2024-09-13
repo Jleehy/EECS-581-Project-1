@@ -11,10 +11,10 @@ class Ship:
     def _populate_indices(self, length, start_row, start_col, vert):
         if vert:
             for col in range(length):
-                self.indices.add((start_row, start_col + col))  # Add tuple to the set.
+                self.indices.add((start_row, start_col + col))  # corrected
         else:
             for row in range(length):
-                self.indices.add((start_row + row, start_col))  # Add tuple to the set.
+                self.indices.add((start_row + row, start_col))  # corrected
     
     # Check if a ship overlaps another ship.
     def _is_overlapping(self, otherShip):
