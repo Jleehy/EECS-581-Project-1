@@ -12,11 +12,12 @@
 
 9/11/24 - 1h
 
- -
+ - Implemented the initial structure of the ship class.
 
 9/12/24 - 1.5h
 
- -
+ - Added color-coded ship status.
+ - Improved clarity of app.py and board.py.
  
 ---
 
@@ -59,9 +60,11 @@
 - Implemented ship count selection, overlap checking, and length checking.
 - Updated the UI for clarity.
 
-9/11/24 - 3h
+9/12/24 - 3h
 
- -
+ - Transferred the bulk of main.py logic to app.py.
+ - Removed ambiguity of row and column variable naming.
+ - Added attack functionality.
 
 ---
 
