@@ -19,6 +19,9 @@ class Board:
             return False
         
         vert_bool = (stern_row == bow_row) # Determine if the ship is vertical or not.
+        if stern_row > bow_row or stern_col > bow_col: #fixes overlap issue
+            stern_row, bow_row = bow_row, stern_row
+            stern_col, bow_col = bow_col, stern_col
         new_ship = Ship(correct_length, stern_row, stern_col, vert=vert_bool) # Create a new ship.
 
         # Check if the ship overlaps with other ships.
