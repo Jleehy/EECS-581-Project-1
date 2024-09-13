@@ -7,19 +7,21 @@ class Ship:
         self.indices = set() #indices is a set containing tuples. Each tuple represents one coordinate
         self._populate_indices(length, start_i, start_j, vert)
 
+    # Add the indices a ship takes up to a set.
     def _populate_indices(self, length, start_i, start_j, vert):
         if vert:
             for i in range(length):
-                self.indices.add((start_i, start_j + i))  # add tuple to the set
+                self.indices.add((start_i, start_j + i))  # Add tuple to the set.
         else:
             for i in range(length):
-                self.indices.add((start_i + i, start_j))  # add tuple to the set
-            
-    def __repr__(self):
-        return f"Indices: {self.indices}"
+                self.indices.add((start_i + i, start_j))  # Add tuple to the set.
     
-    def _overlaps(self, otherShip):
-        for coor in otherShip.indices:
-            if coor in self.indices:
+    # Check if a ship overlaps another ship.
+    def _is_overlapping(self, otherShip):
+        for indices in otherShip.indices:
+            if indices in self.indices:
                 return True
         return False
+    
+    def __repr__(self):
+        return f"Indices: {self.indices}"

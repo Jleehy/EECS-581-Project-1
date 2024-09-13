@@ -16,7 +16,7 @@ class App:
         # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
         # to integers.
         stern_x, stern_y, bow_x, bow_y = self.literals_to_indices(stern, bow)
-        return player.place_ship(stern_x, stern_y, bow_x, bow_y, ship_size) #player.place_ship checks for validity
+        return player.place_ship(stern_x, stern_y, bow_x, bow_y, ship_size) # player.place_ship checks for validity
     
     # Attack a cell on a player's board.
     def attack(self, attacker, defender, pos):
