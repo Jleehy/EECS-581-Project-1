@@ -48,7 +48,7 @@ class Board:
             if (row, col) in ship.indices:
                 ship.indices.remove((row, col))  # Remove the hit index from the ship
                 hit = True  # Set flag to True if a hit occurs
-
+                self._update_matrix(row, col, 6) # Indicate hit status, red.
                 if not ship.indices:
                     sunk = True # Set flag to True if a sink occurs.
                 break
