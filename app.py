@@ -74,6 +74,9 @@ class App:
             self.check_quit(coord)
             if self._is_valid_coordinate(coord[0], coord[1:]):
                 return coord
+
+            # Clear the last line of text to prompt the user again since the coordinate was invalid.
+            print("\x1B[1F\x1B[0J", end = "")
             
     # Prompt the user for a ship coordinate to attack, ensuring a valid input.
     def prompt_attack_coordinate(self):
@@ -82,37 +85,34 @@ class App:
             self.check_quit(coord)
             if self._is_valid_coordinate(coord[0], coord[1:]):
                 return coord
-            
+
     # Prompt the user for the number of ships to play with, ensuring a valid input.
     def prompt_num_ships(self):
         while True:
-            num_ships = input("Enter the number of ships: ")
+            # Move the cursor to (0, 0) and clear everything after the cursor.
+            print("\x1B[H\x1B[0J", end = "")
+
+            num_ships = input("Enter the number of ships (1 - 5): ")
             self.check_quit(num_ships)
             if num_ships.isnumeric():
                 num_ships = int(num_ships)
-                if not (num_ships > 0 and num_ships < 6):
-                    print("The number of ships must be an integer between 1 and 5.")
-                else:
+                if num_ships > 0 and num_ships < 6:
                     self.num_ships = num_ships
                     return
-            else:
-                print("The number of ships must be an integer between 1 and 5.")
     
     @staticmethod
     # Return if the coordinate is valid.
     def _is_valid_coordinate(col, row):
         # Valid x-coordinates: A - J.
         if col < 'A' or col > 'J':
-            print("X-coordinate must be in the range A - J\n")
             return False
+
         # Protect against ValueErrors since y may not be an int.
         try:
             # Valid y-coordinates: 1 - 10.
             if int(row) < 1 or int(row) > 10:
-                print("Y-coordinate must be in the range 1 - 10\n")
                 return False
         except ValueError as e:
-            print("Y-coordinate must be an integer in the range 1 - 10\n")
             return False
-        
+
         return True

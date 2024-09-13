@@ -1,6 +1,7 @@
 from app import App
 from board import Board
 
+# ANSI Escape Sequences Reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
 def main():
     # Create each player's board.
@@ -15,11 +16,17 @@ def main():
 
     # Give each player a chance to place their ships.
     for player in [player1, player2]:
-        print(player.name + "'s turn to place their ships")
+        print("\n" + player.name + "'s turn to place their ships")
 
         # For each ship in the player's arsenal.
         for ship in range(app.num_ships):
+            # Clear the screen from the cursor until the end of the screen.
+            print("\x1B[0J", end = "")
             app.print_board(player)
+
+            print("Coordinate input format: A1")
+            print("Valid x-coordinates: A - J")
+            print("Valid y-coordinates: 1 - 10")
 
             while True:
                 # If the ship size is 1, assign both bow and stern to the same coordinate.
@@ -33,12 +40,20 @@ def main():
                 if app.place_ship(player, stern, bow, ship + 1):
                     break
 
+            # Move the cursor to the line after "Player #'s turn to place their ships".
+            print("\x1B[4;0H", end = "")
+
+        # Clear the screen from the cursor until the end of the screen.
+        print("\x1B[0J", end = "")
         app.print_board(player) # Ensure board prints on last turn.
 
         # Ask the player if they are ready to turn the device over to the second player.
         action = input(f"{player.name}, are you ready to turn the device over to the next player? Press Enter to continue...")
         app.check_quit(action)
-        # NOTE : MISSING TERMINAL CLEAR LOGIC
+
+        # Move the cursor to the line after "Enter the number of ships" to
+        # prepare to clear the screen for Player 2 to place their ships.
+        print("\x1B[2;0H", end = "")
 
     # Begin the game loop.
     while True:
