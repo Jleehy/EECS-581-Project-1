@@ -1,5 +1,6 @@
 from app import App
 from board import Board
+import cursor
 
 # ANSI Escape Sequences Reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
@@ -20,8 +21,7 @@ def main():
 
         # For each ship in the player's arsenal.
         for ship in range(app.num_ships):
-            # Clear the screen from the cursor until the end of the screen.
-            print("\x1B[0J", end = "")
+            cursor.erase()
             app.print_board(player)
 
             print("Coordinate input format: A1")
@@ -41,10 +41,9 @@ def main():
                     break
 
             # Move the cursor to the line after "Player #'s turn to place their ships".
-            print("\x1B[4;0H", end = "")
+            cursor.move_to(4)
 
-        # Clear the screen from the cursor until the end of the screen.
-        print("\x1B[0J", end = "")
+        cursor.erase()
         app.print_board(player) # Ensure board prints on last turn.
 
         # Ask the player if they are ready to turn the device over to the second player.
@@ -53,7 +52,7 @@ def main():
 
         # Move the cursor to the line after "Enter the number of ships" to
         # prepare to clear the screen for Player 2 to place their ships.
-        print("\x1B[2;0H", end = "")
+        cursor.move_to(2)
 
     # Begin the game loop.
     while True:

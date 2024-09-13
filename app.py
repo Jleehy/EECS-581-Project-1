@@ -1,3 +1,4 @@
+import cursor
 import sys
 
 class App:
@@ -76,7 +77,8 @@ class App:
                 return coord
 
             # Clear the last line of text to prompt the user again since the coordinate was invalid.
-            print("\x1B[1F\x1B[0J", end = "")
+            cursor.move_up(1)
+            cursor.erase()
             
     # Prompt the user for a ship coordinate to attack, ensuring a valid input.
     def prompt_attack_coordinate(self):
@@ -89,8 +91,8 @@ class App:
     # Prompt the user for the number of ships to play with, ensuring a valid input.
     def prompt_num_ships(self):
         while True:
-            # Move the cursor to (0, 0) and clear everything after the cursor.
-            print("\x1B[H\x1B[0J", end = "")
+            cursor.move_to(0)
+            cursor.erase()
 
             num_ships = input("Enter the number of ships (1 - 5): ")
             self.check_quit(num_ships)
