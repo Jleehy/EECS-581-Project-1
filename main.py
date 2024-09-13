@@ -42,10 +42,24 @@ def main():
 
     # Begin the game loop.
     while True:
-        app.print_board(player1)
+        # NOTE: Generic prints for now. I just want to debug attack. Currently using player1 and player2 instead of a variable that grabs current player.
+        # this isnt a game loop yet its just for debug purposes.
 
-        # NOTE : ATTACK LOGIC HERE
-        app.prompt_attack()
+        print("Player 1's turn")
+        print("Your Board")
+        app.print_board(player1)
+        print("Enemies Board")
+        app.print_board(player2, censored=True)
+
+        pos = app.prompt_attack_coordinate()
+        hit, sink = app.attack(player2, pos)
+
+        if not hit:
+            print("MISSED!")
+        if hit:
+            print(f"HIT PLAYER 2 @ {pos}")
+        if sink:
+            print("SUNK PLAYERS SHIP OF SIZE X")
         break
 
 if __name__ == "__main__":

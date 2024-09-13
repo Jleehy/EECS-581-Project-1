@@ -36,22 +36,24 @@ class Board:
 
         return True # Returns true only if ship was successfully placed.
     
-    def attack(self, x, y):
-        """
-        #NOT UPDATED THIS WAS FOR DEBUG.PY
+    # Attack player's board, return hit status.
+    def attack(self, row, col):
         hit = False  # Flag to track if a hit occurs.
-        # Iterate through every stored ship (There could be a more efficient solution?)
+        sunk = False # Flag to track if a sink occurs.
+        print(row, col)
+        # Iterate through every stored ship
         for ship in self.ships:
-            # Check if the indices match the ships stored indices.
             print(ship.indices)
-            print(x, y)
-            if (x, y) in ship.indices: 
-                print("HIT")
-                hit = True  # Set flag to True if a hit occurs.
+            # Check if the (row, col) match any of the ship's indices
+            if (row, col) in ship.indices:
+                ship.indices.remove((row, col))  # Remove the hit index from the ship
+                hit = True  # Set flag to True if a hit occurs
+
+                if not ship.indices:
+                    sunk = True # Set flag to True if a sink occurs.
                 break
-        if not hit:
-            print("MISS")
-        """
+        
+        return hit, sunk
     
     # Checks if the ships overlap.
     def is_overlapping(self, new_ship):
