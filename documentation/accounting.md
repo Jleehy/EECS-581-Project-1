@@ -57,6 +57,10 @@
 - Added ship length detection to ensure that the ship dimensions are valid.
 - Improved GUI slightly.
 
+9/13/24 - 2h
+
+- Bug fixes
+
 ---
 
 **Mario Simental**
