@@ -10,6 +10,14 @@
 
 **Steve Gan**
 
+9/11/24 - 1h
+
+ -
+
+9/12/24 - 1.5h
+
+ -
+ 
 ---
 
 **Sean Hammell**
@@ -50,6 +58,9 @@
 - Implemented logic for multiple ship sizes and initial structure.
 - Implemented ship count selection, overlap checking, and length checking.
 - Updated the UI for clarity.
+
+9/12/24 - 3h
+ -
 
 ---
 
