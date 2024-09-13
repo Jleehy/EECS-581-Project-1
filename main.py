@@ -45,7 +45,7 @@ def main():
         app.print_board(player1)
 
         # NOTE : ATTACK LOGIC HERE
-        #app.prompt_attack()
+        app.prompt_attack()
         break
 
 if __name__ == "__main__":

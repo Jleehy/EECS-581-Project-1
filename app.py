@@ -24,14 +24,13 @@ class App:
         return player.place_ship(stern_row, stern_col, bow_row, bow_col, ship_size) # player.place_ship checks for validity
     
     # Attack a cell on a player's board.
-    def attack(self, attacker, defender, pos):
-        """
+    def prompt_attack(self, attacker, defender, pos):
         #NOT UPDATED THIS WAS FOR DEBUG.PY
         # Cast the input initially for easier error checking
         x, y = self.literals_to_indices(pos)
 
-        defender.attack(x, y) # Attack player's board on the indices.
-        """
+        #defender.attack(x, y) # Attack player's board on the indices.
+        
         
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
@@ -94,15 +93,15 @@ class App:
     
     @staticmethod
     # Return if the coordinate is valid.
-    def _is_valid_coordinate(x, y):
+    def _is_valid_coordinate(col, row):
         # Valid x-coordinates: A - J.
-        if x < 'A' or x > 'J':
+        if col < 'A' or col > 'J':
             print("X-coordinate must be in the range A - J\n")
             return False
         # Protect against ValueErrors since y may not be an int.
         try:
             # Valid y-coordinates: 1 - 10.
-            if int(y) < 1 or int(y) > 10:
+            if int(row) < 1 or int(row) > 10:
                 print("Y-coordinate must be in the range 1 - 10\n")
                 return False
         except ValueError as e:
