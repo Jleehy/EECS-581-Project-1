@@ -85,6 +85,10 @@ class Board:
     # Could be overkill but maybe we want future logic.
     def _update_matrix(self, row, col, val):
         self.matrix[row][col] = val
+
+    def all_ships_sunk(self):
+        # If all ships have no remaining coordinates (i.e., no part of the ship is still on the board), return True
+        return all(len(ship.indices) == 0 for ship in self.ships)
         
     def __repr__(self):
         return f"{self.matrix}"
