@@ -42,6 +42,12 @@
 - Created a basic attack loop.
 - Added cursor commands to the attack loop to hide each player's information.
 
+9/14 - 1h
+
+- Added console clearing for ship placement errors.
+- Fixed attacks crashing on strings with length < 2.
+- Prevented players from attacking the same position more than once.
+
 ---
 
 **Jacob Leehy**
