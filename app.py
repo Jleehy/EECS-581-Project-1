@@ -9,7 +9,7 @@ class App:
         # 3: yellow
         # 4: light purple
         # 5: cyan
-        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m", 7: "■"} 
+        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m",     7: "\033[37m•\033[0m"} 
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships
@@ -26,7 +26,18 @@ class App:
     
     def attack(self, defender, pos):
         row, col = self.literals_to_indices(pos)
-        return defender.attack(row, col)
+        hit, sunk = defender.attack(row, col)
+        
+        if hit:
+            print(f"\nHit at {pos}!")
+            if sunk:
+                print("You sunk a ship!")
+            return hit, sunk  # Return both hit and sunk
+        else:
+            print(f"\nMissed at {pos}.")
+            defender._update_matrix(row, col, 7)  # Indicate miss on board with white.
+            return hit, sunk  # Return hit as False, and sunk as False
+
         
     # Print a player's board with literal coordinates.
     def print_board(self, player, censored=False):
