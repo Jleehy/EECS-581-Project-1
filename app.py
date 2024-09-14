@@ -94,6 +94,13 @@ class App:
         while True:
             coord = input("Coordinate to attack: ").strip().upper()[:3]
             self.check_quit(coord)
+
+            # Woe betide ye who try coord[1:] on a string with less than 2 characters.
+            if len(coord) < 2:
+                cursor.move_up(1)
+                cursor.erase()
+                continue
+
             if self._is_valid_coordinate(coord[0], coord[1:]):
                 return coord
 
