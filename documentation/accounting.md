@@ -61,7 +61,7 @@
 
 - Bug fixes and testing
 
-9/14/24 - 2h
+9/14/24 - 1.5h
 
 - Complete attack implementation
 - Bug fixes
