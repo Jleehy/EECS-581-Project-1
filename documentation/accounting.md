@@ -61,6 +61,11 @@
 
 - Bug fixes and testing
 
+9/14/24 - 2h
+
+- Complete attack implementation
+- Bug fixes
+
 ---
 
 **Mario Simental**
