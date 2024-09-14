@@ -75,26 +75,35 @@ def main():
         cursor.move_up(1)
         cursor.erase()
 
+        # Print the current player's board
         print("Your Board")
         app.print_board(players[current_player])
+
+        # Print the enemy's board (the other player's board, censored)
         print("Enemy's Board")
-        app.print_board(players[current_player], censored = True)
+        app.print_board(players[abs(current_player - 1)], censored=True)
 
         coord = app.prompt_attack_coordinate()
-        hit, sink = app.attack(players[abs(current_player - 1)], coord)
+        hit, sink = app.attack(players[abs(current_player - 1)], coord)  # Attack the enemy's board
 
         if hit or sink:
             status = "Hit" if hit else "Sunk"
-            print(f"\n{status} {players[abs(current_player - 1)]}'s ship!")
-            continue
+            print(f"\n{status} {players[abs(current_player - 1)].name}'s ship!")
+        else:
+            print("\nMissed...")
 
-        print("\nMissed...")
+        # Check if all ships of the enemy have been sunk
+        if players[abs(current_player - 1)].all_ships_sunk():
+            print(f"\n{players[current_player].name} wins! All of {players[abs(current_player - 1)].name}'s ships have been sunk!")
+            break  # Exit the game loop to end the game
 
         # Ask the player if they are ready to turn the device over to the second player.
-        action = input(f"\n{players[current_player].name}, press Enter when you're done reviewing you attacks...")
+        action = input(f"\n{players[current_player].name}, press Enter when you're done reviewing your attacks...")
         app.check_quit(action)
 
+        # Switch to the other player
         current_player = abs(current_player - 1)
+
 
         # NOTE: Generic prints for now. I just want to debug attack. Currently using player1 and player2 instead of a variable that grabs current player.
         # this isnt a game loop yet its just for debug purposes.
