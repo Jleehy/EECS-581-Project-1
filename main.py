@@ -65,11 +65,14 @@ def main():
     # Begin the game loop.
     current_player = 0
     while True:
+        attacker = players[current_player]
+        defender = players[abs(current_player - 1)]
+
         cursor.move_to(0)
         cursor.erase()
 
-        print(players[current_player].name + "'s turn to attack\n")
-        action = input(f"{players[current_player].name}, press Enter to begin attacking...")
+        print(attacker.name + "'s turn to attack\n")
+        action = input(f"{attacker.name}, press Enter to begin attacking...")
         app.check_quit(action)
 
         cursor.move_up(1)
@@ -77,14 +80,21 @@ def main():
 
         # Print the current player's board
         print("Your Board")
-        app.print_board(players[current_player])
+        app.print_board(attacker)
 
         # Print the enemy's board (the other player's board, censored)
         print("Enemy's Board")
-        app.print_board(players[abs(current_player - 1)], censored=True)
+        app.print_board(defender, censored=True)
 
-        coord = app.prompt_attack_coordinate()
-        app.attack(players[abs(current_player - 1)], coord)  # Attack the enemy's board
+        while True:
+            coord = app.prompt_attack_coordinate()
+            if not app.attack(attacker, defender, coord): # Don't allow the attacker to attack the same coordinate twice
+                cursor.move_to(31)
+                cursor.erase()
+                print("You've already attacked that coordinate")
+                continue
+
+            break
 
         # Check if all ships of the enemy have been sunk
         if players[abs(current_player - 1)].all_ships_sunk():

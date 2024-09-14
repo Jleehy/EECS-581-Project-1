@@ -7,6 +7,7 @@ class Board:
         self.name = name
         self.matrix = [[0] * 10 for _ in range(10)] # Initialize a 10x10 matrix with zeroes.
         self.ships = [] # Store ships placed on the board.
+        self.shots = set() # tracks what coordinates this ship has fired at
 
     # Place a ship on board given indices. returns true if placed successfully, false if not.
     def place_ship(self, stern_row, stern_col, bow_row, bow_col, correct_length):
@@ -39,9 +40,17 @@ class Board:
                 self._update_matrix(row, stern_col, correct_length)
 
         return True # Returns true only if ship was successfully placed.
-    
-    # Attack player's board, return hit status.
+
+    # Record an attack made by this player, returning if the coordinate was already attacked.
     def attack(self, row, col):
+        if (row, col) in self.shots:
+            return False
+
+        self.shots.add((row, col))
+        return True
+
+    # Handle an attack against this player's board, return hit status.
+    def defend(self, row, col):
         hit = False  # Flag to track if a hit occurs.
         sunk = False # Flag to track if a sink occurs.
         # Iterate through every stored ship
