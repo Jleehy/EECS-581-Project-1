@@ -34,7 +34,7 @@ def main():
 
             print("Coordinate input format: A1")
             print("Valid x-coordinates: A - J")
-            print("Valid y-coordinates: 1 - 10")
+            print("Valid y-coordinates: 1 - 10\n")
 
             while True:
                 # If the ship size is 1, assign both bow and stern to the same coordinate.
@@ -84,13 +84,7 @@ def main():
         app.print_board(players[abs(current_player - 1)], censored=True)
 
         coord = app.prompt_attack_coordinate()
-        hit, sink = app.attack(players[abs(current_player - 1)], coord)  # Attack the enemy's board
-
-        if hit or sink:
-            status = "Hit" if hit else "Sunk"
-            print(f"\n{status} {players[abs(current_player - 1)].name}'s ship!")
-        else:
-            print("\nMissed...")
+        app.attack(players[abs(current_player - 1)], coord)  # Attack the enemy's board
 
         # Check if all ships of the enemy have been sunk
         if players[abs(current_player - 1)].all_ships_sunk():
@@ -103,35 +97,6 @@ def main():
 
         # Switch to the other player
         current_player = abs(current_player - 1)
-
-
-        # NOTE: Generic prints for now. I just want to debug attack. Currently using player1 and player2 instead of a variable that grabs current player.
-        # this isnt a game loop yet its just for debug purposes.
-
-        # print("Player 1's turn")
-        # print("Your Board")
-        # app.print_board(player1)
-        # print("Enemies Board")
-        # app.print_board(player2, censored=True)
-
-        # pos = app.prompt_attack_coordinate()
-        # hit, sink = app.attack(player2, pos)
-
-        # if not hit:
-        #     print("MISSED!")
-        # if hit:
-        #     print(f"HIT PLAYER 2 @ {pos}")
-        # if sink:
-        #     print("SUNK PLAYERS SHIP OF SIZE X")
-
-        # print("Player 2's turn")
-        # print("Your Board")
-        # app.print_board(player2)
-        # print("Enemies Board")
-        # app.print_board(player1, censored=True)
-
-        # break
-
 
 if __name__ == "__main__":
     main()

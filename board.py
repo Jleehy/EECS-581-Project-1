@@ -1,3 +1,4 @@
+import cursor
 from ship import Ship
 
 class Board:
@@ -43,10 +44,8 @@ class Board:
     def attack(self, row, col):
         hit = False  # Flag to track if a hit occurs.
         sunk = False # Flag to track if a sink occurs.
-        print(row, col)
         # Iterate through every stored ship
         for ship in self.ships:
-            print(ship.indices)
             # Check if the (row, col) match any of the ship's indices
             if (row, col) in ship.indices:
                 ship.indices.remove((row, col))  # Remove the hit index from the ship
@@ -55,14 +54,16 @@ class Board:
                 if not ship.indices:
                     sunk = True # Set flag to True if a sink occurs.
                 break
-        
+            
         return hit, sunk
     
     # Checks if the ships overlap.
     def is_overlapping(self, new_ship):
         for ship in self.ships: # This loop checks if the new ship overlaps with any previous ship, returns false if yes.
             if new_ship._is_overlapping(ship):
-                print("Ships cannot overlap.")
+                cursor.move_to(21)
+                cursor.erase()
+                print("Ships cannot overlap")
                 return True
 
     @staticmethod
@@ -70,7 +71,9 @@ class Board:
     def is_correct_length(stern_row, stern_col, bow_row, bow_col, correct_length):
         length = max(abs(stern_row - bow_row), abs(stern_col - bow_col)) + 1 # Calculate the length.
         if length != correct_length: # If the length isn't the intended length, tell user and return false.
-            print(f"The length of ship must be {correct_length}.")
+            cursor.move_to(21)
+            cursor.erase()
+            print(f"The length of ship must be {correct_length}")
             return False
         return True
 
@@ -78,7 +81,9 @@ class Board:
     # Checks if the ship is diagonal, returns true if it is.
     def is_diagonal(stern_row, stern_col, bow_row, bow_col):
         if stern_row != bow_row and stern_col != bow_col:
-            print("Ships must be placed horizontally or vertically\n")
+            cursor.move_to(21)
+            cursor.erase()
+            print("Ships must be placed horizontally or vertically")
             return True
         return False
 

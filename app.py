@@ -32,11 +32,9 @@ class App:
             print(f"\nHit at {pos}!")
             if sunk:
                 print("You sunk a ship!")
-            return hit, sunk  # Return both hit and sunk
         else:
-            print(f"\nMissed at {pos}.")
+            print(f"\nMissed at {pos}...")
             defender._update_matrix(row, col, 7)  # Indicate miss on board with white.
-            return hit, sunk  # Return hit as False, and sunk as False
 
         
     # Print a player's board with literal coordinates.
