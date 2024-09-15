@@ -45,14 +45,14 @@ The `App` class provides a simplified interface for interacting with the players
 
 **NOTE:** *Literals* are passed to calls made to `App`.
 
-`place_ship`: Place ships on the board given literal position and ship size.
-`attack`: Manage attacks made by the player.
-`print_board`: Print a player's board. Can be censored if you want to hide ship placements.
-`literals_to_indices`: Converts *literal* coordinates to *indices*.
-`check_quit`: Checks if Q is entered into prompts, which exits the program.
-`prompt_ship_coordinate`: Prompts user for a ship coordinate (*literal*). 
-`prompt_ship_coordinate`: Prompts user for an attack coordinate (*literal*).
-`prompt_num_ships`: Prompts the user for the number of ships to be played with.
-`_is_valid_coordinate`: Helper function to determine if a given coordinate (*literal*) is valid.
+- `place_ship`: Place ships on the board given literal position and ship size.
+- `attack`: Manage attacks made by the player.
+- `print_board`: Print a player's board. Can be censored if you want to hide ship placements.
+- `literals_to_indices`: Converts *literal* coordinates to *indices*.
+- `check_quit`: Checks if Q is entered into prompts, which exits the program.
+- `prompt_ship_coordinate`: Prompts user for a ship coordinate (*literal*). 
+- `prompt_ship_coordinate`: Prompts user for an attack coordinate (*literal*).
+- `prompt_num_ships`: Prompts the user for the number of ships to be played with.
+- `_is_valid_coordinate`: Helper function to determine if a given coordinate (*literal*) is valid.
 
 ### `board.py` - Player's Board
