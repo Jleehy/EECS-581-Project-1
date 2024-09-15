@@ -12,7 +12,7 @@
 
 9/14/24 - .5h
 
-- Held a team meeting to discuss the finilization process for the project and disperse work among team members.
+- Held a team meeting to discuss the finalization process for the project and disperse work among team members.
 
 ---
 
@@ -72,8 +72,8 @@
 
 9/12/24 - 2h
 
-- Added ship overlap detection to board.hs and main.hs.
-- Added ship count selection and checks to ensure that the count is between 1 and 5.
+- Added ship overlap detection to board.py and main.py.
+- Added ship count selection and checks to ensure the count is between 1 and 5.
 - Added ship length detection to ensure that the ship dimensions are valid.
 - Improved GUI slightly.
 
@@ -96,7 +96,8 @@
 
 9/11/24 - 3h
 
-- Implemented logic for multiple ship sizes and initial structure.
+- Implemented initial structure (Facade pattern).
+- Implemented logic for multiple ship sizes.
 - Implemented ship count selection, overlap checking, and length checking.
 - Updated the UI for clarity.
 
@@ -104,11 +105,16 @@
 
  - Transferred the bulk of main.py logic to app.py.
  - Removed ambiguity of row and column variable naming.
- - Added attack functionality.
+ - Implemented attack functionality.
+
+9/15/24 - 1h
+
+ - Implemented type hints.
 
 ---
 
 **Matthew Sullivan**
+
 9/11/24 - 1h
 - Implemented typing logic for coordinate input
 - Implemented checks to ensure that the coordinates are valid
