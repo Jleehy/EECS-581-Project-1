@@ -26,6 +26,10 @@
 
  - Added color-coded ship status.
  - Improved clarity of app.py and board.py.
+
+9/14/24 - 15 min
+
+ - Allow each player to enter their own name. 
  
 ---
 
