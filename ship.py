@@ -1,10 +1,10 @@
 '''
-Program Name: ship,py
+Program Name: ship.py
 Description: ship.py manages the internal workings of the ships within the game. It is responsible for populating 
     indices and validating some user input.
 Inputs: None
 Output: None
-Code Sources:
+Code Sources: None
 Authors: Steve Gan, Sean Hammell, Jacob Leehy, Mario Simental, Matthew Sullivan
 Creation Date: 9/9/24
 '''
