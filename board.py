@@ -4,7 +4,7 @@ Description: bpard.py maintains the board and controls ship placement as well as
     It also controls much of the turn logic.
 Inputs: The game takes user input periodically during the game.
 Output: The game outputs text to the console
-Code Sources:
+Code Sources: None
 Authors: Steve Gan, Sean Hammell, Jacob Leehy, Mario Simental, Matthew Sullivan
 Creation Date: 9/9/24
 '''
