@@ -42,15 +42,15 @@ This is the starting point for the game. It is responsible for the primary gamep
 4. **Game Logic:** Makes calls to `App` to handle ship placement, ship attacks and board rendering.
 
 ### `app.py` - The Facade
-The `App` class provides a simplified interface for interacting with the players' `Board` objects and managing the flow of the game. 
+The `App` class provides a simplified interface for interacting with the players' `Board` objects and managing the flow of the game. The `App` class stores two `Board` objects (one for each player) the number of ships to be played, and a [config](#boardpy---players-board).
 
 **Design Structure:** Calls are made to `App` from `main.py`, which then forwards calls to `Board`. In other words, `App` handles input and parsing, while `Board` handles game logic.
 
 **NOTE:** `Literals` are passed to `App`.
 
-- `place_ship`: Place ships on the board given literal position and ship size.
-- `attack`: Manage attacks made by the player.
-- `print_board`: Print a player's board. Can be censored if you want to hide ship placements.
+- `place_ship`: Places a ship on a player's `Board` given literal position and ship size.
+- `attack`: Manages attacks made by the player.
+- `print_board`: Prints a player's board. 
 - `literals_to_indices`: Converts `literal` coordinates to `indices`.
 - `check_quit`: Checks if Q is entered into prompts, which exits the program.
 - `prompt_ship_coordinate`: Prompts user for a ship coordinate (`literal`). 
@@ -59,3 +59,11 @@ The `App` class provides a simplified interface for interacting with the players
 - `_is_valid_coordinate`: Helper function to determine if a given coordinate (`literal`) is valid.
 
 ### `board.py` - Player's Board
+The `Board` class handles the overall game logic. Each player is assigned a `Board` which contains:
+- Matrix: The board's data structure, where:
+	- The matrix is a 10x10 array, which supports integers ranging from 0-7:
+		- 0 indicates a blank space.
+		- 1-5 indicates spaces that ships cover. Each number belongs to a different sized ship.
+		- 6 indicidates a ship being hit.
+		- 7 indicates a miss.
+	- Each integer also has a color assigned to it, which the board renders. Colors can be changed via the config stored in the `App` class.
