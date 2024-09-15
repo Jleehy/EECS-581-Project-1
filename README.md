@@ -1,4 +1,5 @@
 
+
 # Battleship - EECS 581 Project 1
 
 ## Authors
@@ -43,16 +44,18 @@ This is the starting point for the game. It is responsible for the primary gamep
 ### `app.py` - The Facade
 The `App` class provides a simplified interface for interacting with the players' `Board` objects and managing the flow of the game. 
 
-**NOTE:** *Literals* are passed to calls made to `App`.
+**Design Structure:** Calls are made to `App` from `main.py`, which then forwards calls to `Board`. In other words, `App` handles input and parsing, while `Board` handles game logic.
+
+**NOTE:** `Literals` are passed to `App`.
 
 - `place_ship`: Place ships on the board given literal position and ship size.
 - `attack`: Manage attacks made by the player.
 - `print_board`: Print a player's board. Can be censored if you want to hide ship placements.
-- `literals_to_indices`: Converts *literal* coordinates to *indices*.
+- `literals_to_indices`: Converts `literal` coordinates to `indices`.
 - `check_quit`: Checks if Q is entered into prompts, which exits the program.
-- `prompt_ship_coordinate`: Prompts user for a ship coordinate (*literal*). 
-- `prompt_ship_coordinate`: Prompts user for an attack coordinate (*literal*).
+- `prompt_ship_coordinate`: Prompts user for a ship coordinate (`literal`). 
+- `prompt_ship_coordinate`: Prompts user for an attack coordinate (`literal`).
 - `prompt_num_ships`: Prompts the user for the number of ships to be played with.
-- `_is_valid_coordinate`: Helper function to determine if a given coordinate (*literal*) is valid.
+- `_is_valid_coordinate`: Helper function to determine if a given coordinate (`literal`) is valid.
 
 ### `board.py` - Player's Board
