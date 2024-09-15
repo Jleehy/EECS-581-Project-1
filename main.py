@@ -27,9 +27,9 @@ def main(): # main function to handle the main gameloop
     print("Important!\n") # print message
     terminal_size = os.get_terminal_size() # variable to get terminal size
     if terminal_size[0] > 79 and terminal_size[1] > 39: # if terminal size meets minimum requirements
-        print(f"Good news! Your terminal is size is {terminal_size[0]}x{terminal_size[1]}!\n") # print message
+        print(f"Good news! Your terminal size is {terminal_size[0]}x{terminal_size[1]}!\n") # print message
     else: # else
-        print(f"Your terminal is {terminal_size[0]}x{terminal_size[1]}, which is... concerning, to say the least.\n") # print warning message
+        print(f"Your terminal size is {terminal_size[0]}x{terminal_size[1]}, which is... concerning, to say the least.\n") # print warning message
 
     print("For the best Battleship experience, we recommend a size of 80x40 or more. This") # print message
     print("is to keep secret information secret and make sure everything displays as it") # print message
