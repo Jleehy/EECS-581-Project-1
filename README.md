@@ -18,7 +18,7 @@ The **Facade Design Pattern** allows for a complex system to be simplified by ha
 ## Code Structure
 
 ### Terminology
-There are several use of terminology within the code:
+There are several uses of terminology within the code:
 
 `Literal`: Refers to the coordinates of the board- with the following format: 
 - **X-Coordinate:** A-J
@@ -51,12 +51,12 @@ This is the starting point for the game. It is responsible for the primary gamep
 ### `app.py` - The Facade
 The `App` class provides a simplified interface for interacting with the players' `Board` objects and managing the flow of the game. The `App` class stores two `Board` objects (one for each player) the number of ships to be played, and a [config](#boardpy---players-board).
 
-**Design Structure:** Calls are made to `App` from `main.py`, which then forwards calls to `Board`. In other words, `App` handles input and parsing, while `Board` handles game logic.
+**Design Structure:** Calls are made to `App` from `main.py`, which then forwards calls to `Board`. In other words, `App` handles input and parsing, while `Board` handles validity and game logic.
 
 **NOTE:** `Literals` are passed to `App`.
 
 - `place_ship`: Parses input to place a ship on a player's `Board` given literal position and ship size.
-- `attack`: Parses input to manages attacks made by the player. Communicates to the attacker's and defender's `Board` objects, calling `attack` and `defend` respectively.
+- `attack`: Parses input to manage attacks made by the player. Communicates to the attacker's and defender's `Board` objects, calling `attack` and `defend` respectively.
 - `print_board`: Prints a player's board. 
 - `literals_to_indices`: Converts `literal` coordinates to `indices`.
 - `check_quit`: Checks if Q is entered into prompts, which exits the program.
@@ -70,9 +70,9 @@ The `Board` class handles the overall game logic. Each player is assigned a `Boa
 - **Matrix:** The board's data structure, where:
 	- The matrix is a `10x10` array, which supports integers ranging from `0-7`:
 		- `0` indicates a blank space.
-		- `1-5` indicates spaces that ships cover. Each number belongs to a different sized ship.
-		- `6` indicidates a ship that has been hit.
-		- `7` indicates an attempted shot pertaining to a miss.
+		- `1-5` indicates spaces that ships cover. Each number belongs to a different-sized ship.
+		- `6` indicates a ship that has been hit.
+		- `7` indicates an attempted shot which leads to a miss.
 	- Each integer also has a color assigned to it, which the board renders. Colors can be changed via the **config** stored in the `App` class.
 - **Ships:** Stores `Ship` objects in an array.
 - **Shots:** Stores attempted shot coordinates (`literals`) in a set.
@@ -81,7 +81,7 @@ The `Board` class handles the overall game logic. Each player is assigned a `Boa
 
 - `place_ship`: Places a ship on a player's `Board` given indices and ship size. Handles validity and logic.
 - `attack`: Manages attacks made by the player. Handles validity and logic.
-- `defend`: Manages an attacks made to the player. Handles validity and logic.
+- `defend`: Manages attacks made to the player. Handles validity and logic.
 - `is_overlapping`: Determine if ships overlap.
 - `is_correct_length`: Determines if a ship being placed matches the correct length specified by the prompt.
 - `is_diagonal`: Checks if a ship placement attempt is diagonal.
@@ -90,7 +90,6 @@ The `Board` class handles the overall game logic. Each player is assigned a `Boa
 
 ### `ship.py` - Ship Logic
 The `Ship` class handles the logic of the ships used in a `Board`. It manages the placement, overlap conditions, and sinking of the ship. Each ship contains:
-
 - **Indices:** A set containing tuples of `incidices`, which represents `indices` on the `matrix` the ship covers.
 
 - `_populate_indices`: Add the indices a ship covers to the set.
