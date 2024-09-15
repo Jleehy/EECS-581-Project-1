@@ -29,10 +29,17 @@ There are several use of terminology within the code:
 - `literals_to_indices`, a helper function in the `App` class,  translates the literals to indices.
 -  **Column:** 0-9
 - **Row:** 0-9
--  **NOTE:** An array is accessed as: 
+-  **NOTE:** An array is accessed as:  
 ```
 Array[row][column]
 ```
+
+`Matrix`: Refers to the data structure the `Board` class uses:
+- The matrix is a `10x10` array, which supports integers ranging from `0-7`:
+	- `0` indicates a blank space.
+	- `1-5` indicates spaces that ships cover. Each number belongs to a different sized ship.
+	- `6` indicidates a ship that has been hit.
+	- `7` indicates an attempted shot pertaining to a miss.
 
 ### `main.py` - Game Driver
 This is the starting point for the game. It is responsible for the primary gameplay loop.
@@ -48,8 +55,8 @@ The `App` class provides a simplified interface for interacting with the players
 
 **NOTE:** `Literals` are passed to `App`.
 
-- `place_ship`: Places a ship on a player's `Board` given literal position and ship size.
-- `attack`: Manages attacks made by the player.
+- `place_ship`: Parses input to place a ship on a player's `Board` given literal position and ship size.
+- `attack`: Parses input to manages attacks made by the player. Communicates to the attacker's and defender's `Board` objects, calling `attack` and `defend` respectively.
 - `print_board`: Prints a player's board. 
 - `literals_to_indices`: Converts `literal` coordinates to `indices`.
 - `check_quit`: Checks if Q is entered into prompts, which exits the program.
@@ -60,10 +67,54 @@ The `App` class provides a simplified interface for interacting with the players
 
 ### `board.py` - Player's Board
 The `Board` class handles the overall game logic. Each player is assigned a `Board` which contains:
-- Matrix: The board's data structure, where:
-	- The matrix is a 10x10 array, which supports integers ranging from 0-7:
-		- 0 indicates a blank space.
-		- 1-5 indicates spaces that ships cover. Each number belongs to a different sized ship.
-		- 6 indicidates a ship being hit.
-		- 7 indicates a miss.
-	- Each integer also has a color assigned to it, which the board renders. Colors can be changed via the config stored in the `App` class.
+- **Matrix:** The board's data structure, where:
+	- The matrix is a `10x10` array, which supports integers ranging from `0-7`:
+		- `0` indicates a blank space.
+		- `1-5` indicates spaces that ships cover. Each number belongs to a different sized ship.
+		- `6` indicidates a ship that has been hit.
+		- `7` indicates an attempted shot pertaining to a miss.
+	- Each integer also has a color assigned to it, which the board renders. Colors can be changed via the **config** stored in the `App` class.
+- **Ships:** Stores `Ship` objects in an array.
+- **Shots:** Stores attempted shot coordinates (`literals`) in a set.
+
+**NOTE:** `Indices` are passed to `Board`.
+
+- `place_ship`: Places a ship on a player's `Board` given indices and ship size. Handles validity and logic.
+- `attack`: Manages attacks made by the player. Handles validity and logic.
+- `defend`: Manages an attacks made to the player. Handles validity and logic.
+- `is_overlapping`: Determine if ships overlap.
+- `is_correct_length`: Determines if a ship being placed matches the correct length specified by the prompt.
+- `is_diagonal`: Checks if a ship placement attempt is diagonal.
+- `_update_matrix`: Updates the `Board` matrix given row, column, and a value.
+- `all_ships_sunk`: Determines if all ships are sunk.
+
+### `ship.py` - Ship Logic
+The `Ship` class handles the logic of the ships used in a `Board`. It manages the placement, overlap conditions, and sinking of the ship. Each ship contains:
+
+- **Indices:** A set containing tuples of `incidices`, which represents `indices` on the `matrix` the ship covers.
+
+- `_populate_indices`: Add the indices a ship covers to the set.
+- `is_overlapping`: Checks if the ship overlaps with another ship.
+
+
+### `cursor.py` - Cursor Logic
+Handles terminal positioning and clearing.
+
+- `move_to`:  Moves the cursor to the beginning of line n.
+- `move_up`: Moves the cursor to the beginning of the previous line, n lines up.
+- `erase`: Erases everything from the cursor to the end of the screen.
+
+## Game Loop
+1.  **Game Initialization:**
+-   `main.py` initializes two players with their boards.
+-   The App prompts each player to place their ships using the place_ship method.
+2.  **Placing Ships:**
+-   The `App` parses the player's input into board coordinates and passes the information to the `Board` for validation and placement.
+3.  **Attacking:**
+-   During each turn, `main.py` prompts the current player to attack using the `App`.
+-   The `App` checks if the attack hits a ship, updates the board, and returns the results.
+4.  **Winning:**
+The game continues until one player has successfully sunk all ships, and the `App` declares the winner.
+
+
+
