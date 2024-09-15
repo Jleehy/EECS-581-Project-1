@@ -6,6 +6,14 @@
 
 - Held a team meeting to discuss the project requirements, create a high-level project design, determine person-hour estimates, and assign tasks.
 
+9/12/24 - .25h
+
+- GTA meeting to discuss project progress.
+
+9/14/24 - .5h
+
+- Held a team meeting to discuss the finilization process for the project and disperse work among team members.
+
 ---
 
 **Steve Gan**
@@ -18,6 +26,10 @@
 
  - Added color-coded ship status.
  - Improved clarity of app.py and board.py.
+
+9/14/24 - 15 min
+
+ - Allow each player to enter their own name. 
  
 ---
 
