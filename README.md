@@ -37,9 +37,9 @@ Array[row][column]
 `Matrix`: Refers to the data structure the `Board` class uses:
 - The matrix is a `10x10` array, which supports integers ranging from `0-7`:
 	- `0` indicates a blank space.
-	- `1-5` indicates spaces that ships cover. Each number belongs to a different sized ship.
-	- `6` indicidates a ship that has been hit.
-	- `7` indicates an attempted shot pertaining to a miss.
+	- `1-5` indicates spaces that ships cover. Each number belongs to a different-sized ship.
+	- `6` indicates a ship that has been hit.
+	- `7` indicates an attempted shot which leads to a miss.
 
 ### `main.py` - Game Driver
 This is the starting point for the game. It is responsible for the primary gameplay loop.
