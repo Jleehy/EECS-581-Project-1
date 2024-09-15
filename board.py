@@ -91,7 +91,7 @@ class Board: # board class to manage the game boards needed for battleship
     def is_overlapping(self, new_ship: Ship) -> bool: # Checks if the ships overlap.
         for ship in self.ships: # This loop checks if the new ship overlaps with any previous ship, returns true if yes.
             if new_ship.is_overlapping(ship): # calls helper function to determine overlap
-                cursor.move_to(21) # move cursor
+                cursor.move_to(23) # move cursor
                 cursor.erase() # erase old text
                 print("Ships cannot overlap") # print no overlap allowed
                 return True # return true
@@ -105,7 +105,7 @@ class Board: # board class to manage the game boards needed for battleship
     def is_correct_length(stern_row: int, stern_col: int, bow_row: int, bow_col: int, correct_length: int) -> bool: # Checks if the ship is the correct length.
         length = max(abs(stern_row - bow_row), abs(stern_col - bow_col)) + 1 # Calculate the length.
         if length != correct_length: # If the length isn't the intended length, tell user and return false.
-            cursor.move_to(21) # move cursor
+            cursor.move_to(23) # move cursor
             cursor.erase() # delete old text
             print(f"The length of ship must be {correct_length}") # tell required length
             return False # return false
@@ -119,7 +119,7 @@ class Board: # board class to manage the game boards needed for battleship
     @staticmethod # static
     def is_diagonal(stern_row: int, stern_col: int, bow_row: int, bow_col: int) -> bool: # Checks if the ship is diagonal, returns true if it is.
         if stern_row != bow_row and stern_col != bow_col: # if rows and columns do not match
-            cursor.move_to(21) # move cursor
+            cursor.move_to(23) # move cursor
             cursor.erase() # erase old text
             print("Ships must be placed horizontally or vertically") # print orientation requirement
             return True # return true
