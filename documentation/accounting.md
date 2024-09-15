@@ -115,9 +115,10 @@
  - Removed ambiguity of row and column variable naming.
  - Implemented attack functionality.
 
-9/15/24 - 1h
+9/15/24 - 3h
 
  - Implemented type hints.
+ - Wrote the README documentation.
 
 ---
 
