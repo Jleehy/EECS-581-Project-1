@@ -62,6 +62,14 @@
 - Updated Enemy's Board to redraw after an attack.
 - Added a notice about terminal sizing.
 
+9/15 - .5h
+
+- Fixed a typo in the terminal size notification.
+- Added default player names.
+- Fixed console clearing for invalid ship placements.
+- Fixed attack coordinate prompt clearing.
+- Updated the ship placement string for 1x1 ships.
+
 ---
 
 **Jacob Leehy**
