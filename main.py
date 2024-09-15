@@ -20,7 +20,7 @@ import os # import for os
 Defines a main function that it used to maintain and run the primary game loop.
 Takes user input and calls the other classes as needed to run the game.
 '''
-def main(): # main function to handle the main gameloop
+def main() -> None: # main function to handle the main gameloop
     cursor.move_to(0) # move cursor
     cursor.erase() # erase old text
 
@@ -72,13 +72,13 @@ def main(): # main function to handle the main gameloop
             while True: # while true
                 # If the ship size is 1, assign both bow and stern to the same coordinate.
                 if ship == 0: # if first ship, aka 1x1
-                    stern = bow = app.prompt_ship_coordinate(ship, "rear") # stern and bow same coordinate
+                    stern = bow = app.prompt_ship_coordinate(ship, "rear") # stern and bow assigned to same coordinate
                 else: # else
                     stern = app.prompt_ship_coordinate(ship, "rear") # Rear coordinate of the ship.
                     bow = app.prompt_ship_coordinate(ship, "front") # Front coordinate of the ship.
 
                 # Place the player's ship on their board.
-                if app.place_ship(player, stern, bow, ship + 1): # place curently input ship
+                if app.place_ship(player, stern, bow, ship + 1): # place currently input ship
                     break # break if invalid
 
             cursor.move_to(6) # Move the cursor to the line after "Player #'s turn to place their ships".

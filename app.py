@@ -10,23 +10,24 @@ Creation Date: 9/9/24
 '''
 import cursor # import for cursor
 import sys # import for sys
+from board import Board # import for board
 
 class App: # App class to handle the general gameplay loop
-    def __init__(self, player1, player2, num_ships=0): # constrcutor for app, takes two players and a number of ships
+    def __init__(self, player1: Board, player2: Board, num_ships: int = 0) -> None: # constructor for app, takes two players and a number of ships
         # 0: blank, 1 - 5: ships of different colors, 6: red hit, 7: white miss
         # 1: blue
         # 2: green
         # 3: yellow
         # 4: light purple
         # 5: cyan
-        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m",     7: "\033[37m•\033[0m"} # defines the configuration for each of the symbols used by the board
+        self.config = {0: "□", 1: "\033[34m■\033[0m", 2: "\033[32m■\033[0m", 3: "\033[33m■\033[0m", 4: "\033[35m■\033[0m", 5: "\033[36m■\033[0m", 6: "\033[31m•\033[0m", 7: "\033[37m•\033[0m"} # defines the configuration for each of the symbols used by the board
         self.player1 = player1 # Holds a board object for Player 1.
         self.player2 = player2 # Holds a board object for Player 2.
         self.num_ships = num_ships # sets number of ships
 
     # Place a ship on a player's board and validate placement. 
     # Returns False if ship placement is unsuccessful and true if it is
-    def place_ship(self, player, stern, bow, ship_size): #function which places a ship on the board
+    def place_ship(self, player: Board, stern: str, bow: str, ship_size: int) -> bool: #function which places a ship on the board
         # Create indices for the stern and bow.
         # Note: There is no need to wrap this in a try-except because
         # is_valid_coordinate ensures stern[1:] and bow[1:] can be cast
@@ -38,7 +39,7 @@ class App: # App class to handle the general gameplay loop
     Handles the attacking process by generating a response string and calling other methods to update the boards as needed.
     It also indirectly allows the boards to be printed to the players as needed.
     '''
-    def attack(self, attacker, defender, pos): # defines a function that will be used to attack an oposing board
+    def attack(self, attacker: Board, defender: Board, pos: str) -> bool: # defines a function that will be used to attack an oposing board
         attack_result = "" # instantiate var as string for outcome
         row, col = self.literals_to_indices(pos) # converts the attack position to coordinates that can be used on the board
         if not attacker.attack(row, col): # calls boards attack method to determine if that space has already been attacked
@@ -61,7 +62,7 @@ class App: # App class to handle the general gameplay loop
      It also consideres what information should be displayed to the user by censoring certain information if needed.
     '''   
     # Print a player's board with literal coordinates.
-    def print_board(self, player, censored=False): #defines a method that prints the board, taking a player and censored boolean as input
+    def print_board(self, player: Board, censored: bool = False) -> None: #defines a method that prints the board, taking a player and censored boolean as input
         column_headers = "\n   " + "   ".join("A B C D E F G H I J".split()) # add column headers (A-J)
         print(column_headers) # print the column headers
 
@@ -83,8 +84,8 @@ class App: # App class to handle the general gameplay loop
     Returns parsed coordinate(s).
     '''
     @staticmethod #static
-    def literals_to_indices(pos1, pos2=None): # defines a method to convert literals to usable indices
-        def parse_position(pos): # helper func to parse pos
+    def literals_to_indices(pos1: str, pos2: str = None) -> tuple[int, int] | tuple[int, int, int, int]: # defines a method to convert literals to usable indices
+        def parse_position(pos: str) -> tuple[int, int]: # helper func to parse pos
             row = int(pos[1:]) - 1 # extracts everything after the first char and converts to int. i.e. "A10" -> 10
             col = ord(pos[0]) - ord('A') # extracts first character and subtracts A ascii code. This essentially makes a letter based index system into a zero based index system
             return row, col # return the new row and col
@@ -99,7 +100,7 @@ class App: # App class to handle the general gameplay loop
 
     @staticmethod # static
     # Check if the program should exit.
-    def check_quit(action): # function to check to see if Q is entered and exit the program if it is
+    def check_quit(action: str) -> None: # function to check to see if Q is entered and exit the program if it is
         if len(action) == 0: # nothing entered
             return # return
         if action[0].upper() == 'Q': # if the action is q or Q
@@ -109,7 +110,7 @@ class App: # App class to handle the general gameplay loop
     This method prompts the user for ship coordinates and validates those coordinates. It also cleans 
     the board as is needed. It returns the coordinate if it is valid and reprompts the user if not.
     '''
-    def prompt_ship_coordinate(self, ship_number, part): # Prompt the user for a ship coordinate, ensuring a valid input.
+    def prompt_ship_coordinate(self, ship_number: int, part: str) -> None: # Prompt the user for a ship coordinate, ensuring a valid input.
         while True: # while true
             coord = input(f"Coordinate for the {part} of ship {ship_number + 1}, with dimensions 1x{ship_number+1}: ").strip().upper()[:3] # get coordinate and specify ship side, number, and dimensions to the user
             self.check_quit(coord) # check to see if q or Q
@@ -124,7 +125,7 @@ class App: # App class to handle the general gameplay loop
     This method prompts the user for attack coordinates and validates those coordinates. 
     It returns the coordinate if valid. Otherwise, it reprompts the user.
     '''
-    def prompt_attack_coordinate(self): # Prompt the user for a ship coordinate to attack, ensuring a valid input.
+    def prompt_attack_coordinate(self) -> str: # Prompt the user for a ship coordinate to attack, ensuring a valid input.
         while True: # while true
             coord = input("Coordinate to attack: ").strip().upper()[:3] # get attack coordinate from user
             self.check_quit(coord) # check to see if q or Q entered
@@ -142,7 +143,7 @@ class App: # App class to handle the general gameplay loop
     This method prompts the user to enter the number of ships they want to play with.
     It also checks the input to ensure that it meets game specifications.
     '''
-    def prompt_num_ships(self): # Prompt the user for the number of ships to play with, ensuring a valid input.
+    def prompt_num_ships(self) -> str: # Prompt the user for the number of ships to play with, ensuring a valid input.
         while True: # while true
             num_ships = input("Enter the number of ships (1 - 5): ") # prompt for number of ships
             self.check_quit(num_ships) # check if q or Q entered
@@ -157,7 +158,7 @@ class App: # App class to handle the general gameplay loop
     of what is entered. Returns a boolean representing the validity of the coordinate.
     '''
     @staticmethod # static
-    def _is_valid_coordinate(col, row): # Return if the coordinate is valid.
+    def _is_valid_coordinate(col: str, row: str) -> bool: # Return if the coordinate is valid.
         # Valid x-coordinates: A - J.
         if col < 'A' or col > 'J': # col must be between A and J
             return False # retur  false if not A - J

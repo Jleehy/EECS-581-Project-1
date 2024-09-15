@@ -13,7 +13,7 @@ from ship import Ship # import for Ship
 
 class Board: # board class to manage the game boards needed for battleship
 
-    def __init__(self, name): # constructor that takes a name
+    def __init__(self, name: str) -> None: # constructor that takes a name
         self.name = name # object name is name
         self.matrix = [[0] * 10 for _ in range(10)] # Initialize a 10x10 matrix with zeroes.
         self.ships = [] # Store ships placed on the board.
@@ -25,7 +25,7 @@ class Board: # board class to manage the game boards needed for battleship
     is necessary. It updates the board matrix as needed. Returns a boolean representing a successful/unsuccessful
     operation.
     '''
-    def place_ship(self, stern_row, stern_col, bow_row, bow_col, correct_length): # Place a ship on board given indices. returns true if placed successfully, false if not.
+    def place_ship(self, stern_row: int, stern_col: int, bow_row: int, bow_col: int, correct_length: int) -> bool: # Place a ship on board given indices. returns true if placed successfully, false if not.
         
         if self.is_diagonal(stern_row, stern_col, bow_row, bow_col): # Check if the ship is being placed diagonally.
             return False # return false
@@ -57,7 +57,7 @@ class Board: # board class to manage the game boards needed for battleship
     Defines a method that checks if an attack has already been made and adds it to the attack log if not.
     Returns a boolean value if the attack is invalid due to repitition.
     '''
-    def attack(self, row, col): # Record an attack made by this player, returning if the coordinate was already attacked.
+    def attack(self, row: int, col: int) -> bool: # Record an attack made by this player, returning if the coordinate was already attacked.
         if (row, col) in self.shots: # if coordinate is already in shots
             return False # return false
 
@@ -69,7 +69,7 @@ class Board: # board class to manage the game boards needed for battleship
     It updates the board as needed to represent each of these cases. It returns two boolean values
     which indicate if a hit, miss, or sink was achieved.
     '''
-    def defend(self, row, col): # Handle an attack against this player's board, return hit status.
+    def defend(self, row: int, col: int) -> tuple[bool, bool]: # Handle an attack against this player's board, return hit status.
         hit = False  # Flag to track if a hit occurs.
         sunk = False # Flag to track if a sink occurs.
         for ship in self.ships: # iterate over all ships
@@ -88,20 +88,21 @@ class Board: # board class to manage the game boards needed for battleship
     Defines a method to iterate over the ships and determine if any inputs overlap.
     Returns a boolean value to specify if ships overlap.
     '''
-    def is_overlapping(self, new_ship): # Checks if the ships overlap.
-        for ship in self.ships: # This loop checks if the new ship overlaps with any previous ship, returns false if yes.
-            if new_ship._is_overlapping(ship): # calls helper function to determine overlap - if false
+    def is_overlapping(self, new_ship: Ship) -> bool: # Checks if the ships overlap.
+        for ship in self.ships: # This loop checks if the new ship overlaps with any previous ship, returns true if yes.
+            if new_ship.is_overlapping(ship): # calls helper function to determine overlap
                 cursor.move_to(21) # move cursor
                 cursor.erase() # erase old text
                 print("Ships cannot overlap") # print no overlap allowed
                 return True # return true
+        return False # return false
 
     '''
     Defines a method that checks the length of a ship to ensure that ships are the correct length.
     It returns a boolean value indicating if the ship has the correct length.
     '''
     @staticmethod # static
-    def is_correct_length(stern_row, stern_col, bow_row, bow_col, correct_length): # Checks if the ship is the correct length.
+    def is_correct_length(stern_row: int, stern_col: int, bow_row: int, bow_col: int, correct_length: int) -> bool: # Checks if the ship is the correct length.
         length = max(abs(stern_row - bow_row), abs(stern_col - bow_col)) + 1 # Calculate the length.
         if length != correct_length: # If the length isn't the intended length, tell user and return false.
             cursor.move_to(21) # move cursor
@@ -116,7 +117,7 @@ class Board: # board class to manage the game boards needed for battleship
     of the ship.
     '''
     @staticmethod # static
-    def is_diagonal(stern_row, stern_col, bow_row, bow_col): # Checks if the ship is diagonal, returns true if it is.
+    def is_diagonal(stern_row: int, stern_col: int, bow_row: int, bow_col: int) -> bool: # Checks if the ship is diagonal, returns true if it is.
         if stern_row != bow_row and stern_col != bow_col: # if rows and columns do not match
             cursor.move_to(21) # move cursor
             cursor.erase() # erase old text
@@ -128,15 +129,15 @@ class Board: # board class to manage the game boards needed for battleship
     Defines a method used to update the board matrix as needed.
     '''
     # Could be overkill but maybe we want future logic.
-    def _update_matrix(self, row, col, val): # function to update the matrix. takes row, col, and update value
+    def _update_matrix(self, row: int, col: int, val: int) -> None: # function to update the matrix. takes row, col, and update value
         self.matrix[row][col] = val # sets matrix coordinate to the desired value
 
     '''
     Defines a method used to dertmine if all ships have been sunk or not. Returns a boolean
     representing the outcome.
     '''
-    def all_ships_sunk(self): # function to determine if all ships are sunk - used for win condition
+    def all_ships_sunk(self) -> bool: # function to determine if all ships are sunk - used for win condition
         return all(len(ship.indices) == 0 for ship in self.ships) # If all ships have no remaining coordinates (i.e., no part of the ship is still on the board), return True
         
-    def __repr__(self): # magic method for printing
+    def __repr__(self) -> str: # magic method for printing
         return f"{self.matrix}" # makes printing easy. just print matrix
