@@ -131,13 +131,12 @@ class App: # App class to handle the general gameplay loop
             self.check_quit(coord) # check to see if q or Q entered
 
             # Woe betide ye who try coord[1:] on a string with less than 2 characters.
-            if len(coord) < 2: # verify length less than 2
+            if len(coord) < 2 or not self._is_valid_coordinate(coord[0], coord[1:]): # reprompt if the length is less than 2 or the coordinate is invalid
                 cursor.move_up(1) # move cursor
                 cursor.erase() # erase old text
                 continue # continue in loop, aka reprompt
 
-            if self._is_valid_coordinate(coord[0], coord[1:]): # If valid coordinate
-                return coord # return the coordinate
+            return coord # return the coordinate
 
     '''
     This method prompts the user to enter the number of ships they want to play with.
