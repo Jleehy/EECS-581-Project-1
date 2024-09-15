@@ -5,7 +5,7 @@ Description: This is the main.py for a python Battleship game designed to be pla
     attacking the opposing player until one player has sunk all of the opposing ships. main.py controls the primary gameplay loop.
 Inputs: The game takes user input periodically during the game.
 Output: The game outputs text to the console
-Code Sources:
+Code Sources: None
 Authors: Steve Gan, Sean Hammell, Jacob Leehy, Mario Simental, Matthew Sullivan
 Creation Date: 9/9/24
 '''
