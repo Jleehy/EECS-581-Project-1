@@ -88,11 +88,20 @@ def main():
 
         while True:
             coord = app.prompt_attack_coordinate()
-            if not app.attack(attacker, defender, coord): # Don't allow the attacker to attack the same coordinate twice
+            attack_result = app.attack(attacker, defender, coord)
+            if len(attack_result) == 0: # Don't allow the attacker to attack the same coordinate twice
                 cursor.move_to(31)
                 cursor.erase()
                 print("You've already attacked that coordinate")
                 continue
+
+            # Erase everything after "Enemy's Board"
+            cursor.move_to(18)
+            cursor.erase()
+
+            # Print the enemies board with the result of the attack
+            app.print_board(defender, censored=True)
+            print(attack_result)
 
             break
 

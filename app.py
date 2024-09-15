@@ -25,21 +25,22 @@ class App:
         return player.place_ship(stern_row, stern_col, bow_row, bow_col, ship_size) # player.place_ship checks for validity
     
     def attack(self, attacker, defender, pos):
+        attack_result = ""
         row, col = self.literals_to_indices(pos)
         if not attacker.attack(row, col):
-            return False
+            return attack_result
 
         hit, sunk = defender.defend(row, col)
         
         if hit:
-            print(f"\nHit at {pos}!")
+            attack_result += f"Hit at {pos}!"
             if sunk:
-                print("You sunk a ship!")
+                attack_result += "\nYou sunk a ship!"
         else:
-            print(f"\nMissed at {pos}...")
+            attack_result += f"Missed at {pos}..."
             defender._update_matrix(row, col, 7)  # Indicate miss on board with white.
 
-        return True
+        return attack_result
 
         
     # Print a player's board with literal coordinates.
