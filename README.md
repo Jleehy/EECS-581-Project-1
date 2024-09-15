@@ -17,7 +17,7 @@ The **Facade Design Pattern** allows for a complex system to be simplified by ha
 ## Code Structure
 
 ### Terminology
-There is several use of terminology within the code:
+There are several use of terminology within the code:
 
 `Literal`: Refers to the coordinates of the board- with the following format: 
 - **X-Coordinate:** A-J
@@ -35,7 +35,7 @@ Array[row][column]
 
 ### `main.py` - Game Driver
 This is the starting point for the game. It is responsible for the primary gameplay loop.
-1. **I/O:** Gets player names, number of ships to be played, prompts for ship placements, and for ship attacks.
+1. **I/O:** Gets player names, number of ships to be played, prompts for ship placements, and ship attacks.
 2. **Initialization:** Initializes an `App` object and two players with `Board` objects.
 3. **Gameplay Loop:** Manages turns between players, allowing them to place ships and attack each other's boards.
 4. **Game Logic:** Makes calls to `App` to handle ship placement, ship attacks and board rendering.
@@ -47,12 +47,12 @@ The `App` class provides a simplified interface for interacting with the players
 
 `place_ship`: Place ships on the board given literal position and ship size.
 `attack`: Manage attacks made by the player.
-`print_board`: Print a players board. Can be censored if you want to hide ship placements.
+`print_board`: Print a player's board. Can be censored if you want to hide ship placements.
 `literals_to_indices`: Converts *literal* coordinates to *indices*.
 `check_quit`: Checks if Q is entered into prompts, which exits the program.
 `prompt_ship_coordinate`: Prompts user for a ship coordinate (*literal*). 
 `prompt_ship_coordinate`: Prompts user for an attack coordinate (*literal*).
-`prompt_num_ships`: Prompts user for the number of ships to be played with.
+`prompt_num_ships`: Prompts the user for the number of ships to be played with.
 `_is_valid_coordinate`: Helper function to determine if a given coordinate (*literal*) is valid.
 
 ### `board.py` - Player's Board
