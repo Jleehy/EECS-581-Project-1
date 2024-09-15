@@ -3,7 +3,7 @@ Program Name: cursor.py
 Description: cursor.py is responsible for making the game UI user readable. It also obscures important information.
 Inputs: None
 Output: Clears text from the console and moves the cursor.
-Code Sources:
+Code Sources: None
 Authors: Steve Gan, Sean Hammell, Jacob Leehy, Mario Simental, Matthew Sullivan
 Creation Date: 9/9/24
 '''
