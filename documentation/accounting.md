@@ -79,12 +79,16 @@
 
 9/13/24 - 2h
 
-- Bug fixes and testing
+- Bug fixes and testing.
 
 9/14/24 - 1.5h
 
-- Complete attack implementation
-- Bug fixes
+- Complete attack implementation.
+- Bug fixes.
+
+9/15/24 - 3h
+
+-Added comments.
 
 ---
 
