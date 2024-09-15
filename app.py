@@ -111,8 +111,9 @@ class App: # App class to handle the general gameplay loop
     the board as is needed. It returns the coordinate if it is valid and reprompts the user if not.
     '''
     def prompt_ship_coordinate(self, ship_number: int, part: str) -> None: # Prompt the user for a ship coordinate, ensuring a valid input.
+        part_str = f"the {part} of ship" if ship_number > 0 else "ship"
         while True: # while true
-            coord = input(f"Coordinate for the {part} of ship {ship_number + 1}, with dimensions 1x{ship_number+1}: ").strip().upper()[:3] # get coordinate and specify ship side, number, and dimensions to the user
+            coord = input(f"Coordinate for {part_str} {ship_number + 1}, with dimensions 1x{ship_number+1}: ").strip().upper()[:3] # get coordinate and specify ship side, number, and dimensions to the user
             self.check_quit(coord) # check to see if q or Q
             if self._is_valid_coordinate(coord[0], coord[1:]): # send to coordinate checker to see if valid - pass as two parts
                 return coord # retur the coordinate if valid
