@@ -152,7 +152,10 @@ class App: # App class to handle the general gameplay loop
                 if num_ships > 0 and num_ships < 6: # verify ships between 1 and 5
                     self.num_ships = num_ships # set num ships to num ships
                     return # return
-    
+
+            cursor.move_up(1) # move the cursor back to the line that prompts for the number of ships
+            cursor.erase() # erase that line to prompt the user again
+
     '''
     This method verifies that a give coordinate is valid. It does this by verifying the row and column
     of what is entered. Returns a boolean representing the validity of the coordinate.
