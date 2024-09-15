@@ -97,12 +97,12 @@ def main():
             break
 
         # Check if all ships of the enemy have been sunk
-        if players[abs(current_player - 1)].all_ships_sunk():
-            print(f"\n{players[current_player].name} wins! All of {players[abs(current_player - 1)].name}'s ships have been sunk!\n")
+        if defender.all_ships_sunk():
+            print(f"\n{attacker.name} wins! All of {defender.name}'s ships have been sunk!\n")
             break  # Exit the game loop to end the game
 
         # Ask the player if they are ready to turn the device over to the second player.
-        action = input(f"\n{players[current_player].name}, press Enter when you're done reviewing your attacks...")
+        action = input(f"\n{attacker.name}, press Enter when you're done reviewing your attacks...")
         app.check_quit(action)
 
         # Switch to the other player
