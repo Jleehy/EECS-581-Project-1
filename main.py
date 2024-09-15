@@ -6,8 +6,10 @@ import cursor
 
 def main():
     # Create each player's board.
-    player1 = Board("Player 1")
-    player2 = Board("Player 2")
+    name1 = input("Enter the first player's name: ")
+    name2 = input("Enter the second player's name: ")
+    player1 = Board(name1)
+    player2 = Board(name2)
     players = [player1, player2]
     
     # Create the Battleship app.
