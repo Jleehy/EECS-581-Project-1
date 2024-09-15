@@ -1,10 +1,29 @@
 from app import App
 from board import Board
 import cursor
+import os
 
 # ANSI Escape Sequences Reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 
 def main():
+    cursor.move_to(0)
+    cursor.erase()
+
+    print("Important!\n")
+    terminal_size = os.get_terminal_size()
+    if terminal_size[0] > 79 and terminal_size[1] > 39:
+        print(f"Good news! Your terminal is size is {terminal_size[0]}x{terminal_size[1]}!\n")
+    else:
+        print(f"Your terminal is {terminal_size[0]}x{terminal_size[1]}, which is... concerning, to say the least.\n")
+
+    print("For the best Battleship experience, we recommend a size of 80x40 or more. This")
+    print("is to keep secret information secret and make sure everything displays as it")
+    print("should.\n")
+    input("Press Enter to acknowledge...")
+
+    cursor.move_to(0)
+    cursor.erase()
+
     # Create each player's board.
     name1 = input("Enter the first player's name: ")
     name2 = input("Enter the second player's name: ")
@@ -51,7 +70,7 @@ def main():
                     break
 
             # Move the cursor to the line after "Player #'s turn to place their ships".
-            cursor.move_to(4)
+            cursor.move_to(6)
 
         cursor.erase()
         app.print_board(player) # Ensure board prints on last turn.
@@ -62,7 +81,7 @@ def main():
 
         # Move the cursor to the line after "Enter the number of ships" to
         # prepare to clear the screen for Player 2 to place their ships.
-        cursor.move_to(2)
+        cursor.move_to(4)
 
     # Begin the game loop.
     current_player = 0

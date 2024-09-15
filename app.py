@@ -113,9 +113,6 @@ class App:
     # Prompt the user for the number of ships to play with, ensuring a valid input.
     def prompt_num_ships(self):
         while True:
-            cursor.move_to(0)
-            cursor.erase()
-
             num_ships = input("Enter the number of ships (1 - 5): ")
             self.check_quit(num_ships)
             if num_ships.isnumeric():
