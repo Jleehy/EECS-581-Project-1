@@ -4,7 +4,7 @@ Description: app.py controls several fundamental aspects of the gameplay loop, i
     and input processing.
 Inputs: The game takes user input periodically during the game.
 Output: The game outputs text to the console
-Code Sources:
+Code Sources: None
 Authors: Steve Gan, Sean Hammell, Jacob Leehy, Mario Simental, Matthew Sullivan
 Creation Date: 9/9/24
 '''
@@ -39,10 +39,10 @@ class App: # App class to handle the general gameplay loop
     Handles the attacking process by generating a response string and calling other methods to update the boards as needed.
     It also indirectly allows the boards to be printed to the players as needed.
     '''
-    def attack(self, attacker: Board, defender: Board, pos: str) -> bool: # defines a function that will be used to attack an oposing board
+    def attack(self, attacker: Board, defender: Board, pos: str) -> bool: # defines a function that will be used to attack an opposing board
         attack_result = "" # instantiate var as string for outcome
         row, col = self.literals_to_indices(pos) # converts the attack position to coordinates that can be used on the board
-        if not attacker.attack(row, col): # calls boards attack method to determine if that space has already been attacked
+        if not attacker.attack(row, col): # calls boards' attack method to determine if that space has already been attacked
             return attack_result # If attacked, return result
 
         hit, sunk = defender.defend(row, col) # calls boards defend method to determing the outcome of the attack using the defenders board. Assigns boolean values to hit and sunk
